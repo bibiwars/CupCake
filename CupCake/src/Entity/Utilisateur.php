@@ -250,4 +250,22 @@ class Utilisateur
 
         return $this;
     }
+
+
+    // Custom
+
+    public function initUtilisateur(String $a, String $b, String $c, String $d, String $e, String $f, String $g, String $h, int $i, String $j)
+    {
+        $this->setNom($a);
+        $this->setPrenom($b);
+        $this->setEmail($c);
+        $this->setAdresse($d);
+        $this->setTel($e);
+        $this->setUsername($f);
+        $this->setPassword($g);
+        $this->settype($h);
+        $this->setactiver($i);
+        $this->setimage($j);
+    }
+
 }
