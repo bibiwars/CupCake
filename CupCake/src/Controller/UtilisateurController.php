@@ -33,4 +33,51 @@ class UtilisateurController extends AbstractController
         return new JsonResponse(array('result' => 'ajouté'));
     }
 
+    /**
+     * @Route("/utilisateur/liste", name="liste_utilisateur")
+     */
+    public function listeUtilisateurs(): Response
+    {
+        $users = $this->getDoctrine()->getRepository(Utilisateur::class)->findAll();
+        $response = array();
+        foreach ($users as $user) {
+            $response[] = array(
+                'username' => $user->getUsername(),
+            );
+        }
+        return new JsonResponse(json_encode($response));
+    }
+
+    /**
+     * @Route("/utilisateur/id/{id}", name="rechercheId_utilisateur")
+     */
+    public function rechercheIdUtilisateur(int $id): Response
+    {
+        $response = array();
+        $user = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($id);
+        if ($user==null){
+            $response[] = array('resultat' => "erreur",       );
+        }else{
+            $response[] = array('username' => $user->getUsername(),       );
+        }
+        
+        return new JsonResponse(json_encode($response));
+    }
+
+    /**
+     * @Route("/utilisateur/supprimer/{id}", name="supprimer_utilisateur")
+     */
+    public function supprimerUtilisateur(int $id): Response
+    {
+        $user = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($id);
+        $m = $this->getDoctrine()->getManager();
+        $m->remove($user);
+        $m->flush();
+        $response = array();
+        $response[] = array(
+            'resultat' => 'Supprime',
+        );
+        return new JsonResponse(json_encode($response));
+    }
+
 }
