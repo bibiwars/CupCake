@@ -28,7 +28,7 @@ class NoteController extends AbstractController
         return new Response(json_encode(array('resultat' => '1')));
     }
 
-        /**
+    /**
      * @Route("/note/ajouter", name="ajout_note")
      */
     public function ajoutnote(Request $request, SerializerInterface $seralizer): Response
@@ -38,21 +38,22 @@ class NoteController extends AbstractController
             $note = isset($data['note']) ? $data['note'] : null;
             $cibletype = isset($data['cible']) ? $data['cible'] : null;
             $cibleid = isset($data['cibleid']) ? $data['cibleid'] : null;
-            if ($cibletype==null || !in_array($ciblenom, array("Produit", "Patisserie"))) return new Response(json_encode(array('resultat' => 1007))); //cibletype value invalid
-            if ($ciblenom==null) return new Response(json_encode(array('resultat' => 1008))); //cibleid value invalid
             if ($note==null || $note<0 || $note>5) return new Response(json_encode(array('resultat' => 1009))); //note value invalid
+            if ($cibletype==null || !in_array($cibletype, array("Produit", "Patisserie"))) return new Response(json_encode(array('resultat' => 1007))); //cibletype value invalid
+            if ($cibleid==null) return new Response(json_encode(array('resultat' => 1008))); //cibleid value invalid
 
-            if($cibletype=="Patisserie"){
+            /*if($cibletype=="Patisserie"){
                 $cible = $this->getDoctrine()->getRepository(Patisserie::class)->findOneById($cibleid);
             }else{
                 $cible = $this->getDoctrine()->getRepository(Produit::class)->findOneById($cibleid);
             }
-            if (!$cible) return new Response(json_encode(array('resultat' => 1008))); //cibleid value invalid
+            if (!$cible) return new Response(json_encode(array('resultat' => 1008))); //cibleid value invalid*/
             
-            $userid = 1; // get authz()
+            $userid = 5; // get userid from session; CHANGE THIS CODE
+            if ($userid==-1) return new Response(json_encode(array('resultat' => 1000))); //unauthorized
             $user = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($userid);
             
-            $n = new Note($note, $user, $cibleid);
+            $n = new Note($note, $user, $cibleid, $cibletype);
             $m = $this->getDoctrine()->getManager();
             $m->persist($n);
             $m->flush();
@@ -61,5 +62,31 @@ class NoteController extends AbstractController
             return new Response(json_encode(array('resultat' => '1')));
         }
         
+    }
+
+    /**
+     * @Route("/note/patisserie/{id}", name="patisserie_notes")
+     */
+    public function patisserienotes(int $id, Request $request, SerializerInterface $seralizer): Response
+    {
+        try{
+            // finds note of patisserie
+            return new Response(json_encode(array('resultat' => '0')));
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }
+    }
+
+    /**
+     * @Route("/note/produit/{id}", name="produit_notes")
+     */
+    public function produitnotes(int $id, Request $request, SerializerInterface $seralizer): Response
+    {
+        try{
+            // finds note of produit
+            return new Response(json_encode(array('resultat' => '0')));
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }
     }
 }

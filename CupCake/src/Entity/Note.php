@@ -30,15 +30,21 @@ class Note
     private $utilisateur;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $cible;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cibletype;
     
-    public function __construct(int $a, Utilisateur $b, string $c)
+    public function __construct(int $a, Utilisateur $b, int $d, string $c)
     {
         $this->setNote($a);
         $this->setUtilisateur($b);
-        $this->setCible($c);
+        $this->setCible($d);
+        $this->setCibletype($c);
     }
 
     public function getId(): ?int
@@ -70,14 +76,26 @@ class Note
         return $this;
     }
 
-    public function getCible(): ?string
+    public function getCible(): ?int
     {
         return $this->cible;
     }
 
-    public function setCible(string $cible): self
+    public function setCible(int $cible): self
     {
         $this->cible = $cible;
+
+        return $this;
+    }
+
+    public function getCibletype(): ?string
+    {
+        return $this->cibletype;
+    }
+
+    public function setCibletype(string $cibletype): self
+    {
+        $this->cibletype = $cibletype;
 
         return $this;
     }

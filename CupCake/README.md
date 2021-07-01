@@ -3,6 +3,7 @@
     ## API Result codes
         0: no errors
         1: unknown error
+        1000: unauthorized
         1001: password value empty
         1002: password verification does not match
         1003: old password does not match
