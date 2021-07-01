@@ -36,15 +36,41 @@ class UtilisateurRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Utilisateur
+    
+    public function findOneByIdSecure($id)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT u.id, u.nom, u.prenom, u.email, u.adresse, u.tel, u.username 
+            FROM App\Entity\Utilisateur u
+            WHERE u.id = :id'
+        )->setParameter('id', $id);
+        return $query->getOneOrNullResult();
     }
-    */
+
+    public function findOneByUsernameSecure($username)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT u.id, u.nom, u.prenom, u.email, u.adresse, u.tel, u.username 
+            FROM App\Entity\Utilisateur u
+            WHERE u.username = :username'
+        )->setParameter('username', $username);
+        return $query->getOneOrNullResult();
+    }
+
+    public function findMultipleSecure($chaine)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT u.id, u.nom, u.prenom, u.email, u.adresse, u.tel, u.username 
+            FROM App\Entity\Utilisateur u
+            WHERE u.nom LIKE :chaine OR u.prenom LIKE :chaine OR u.email LIKE :chaine'
+        )->setParameter('chaine', '%'.$chaine.'%');
+        return $query->execute();
+    }
+    
 }

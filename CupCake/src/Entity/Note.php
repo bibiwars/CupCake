@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NoteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Utilisateur;
 
 /**
  * @ORM\Entity(repositoryClass=NoteRepository::class)
@@ -32,6 +33,13 @@ class Note
      * @ORM\Column(type="string", length=255)
      */
     private $cible;
+    
+    public function __construct(int $a, Utilisateur $b, string $c)
+    {
+        $this->setNote($a);
+        $this->setUtilisateur($b);
+        $this->setCible($c);
+    }
 
     public function getId(): ?int
     {

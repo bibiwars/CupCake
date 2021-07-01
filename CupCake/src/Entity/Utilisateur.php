@@ -65,7 +65,7 @@ class Utilisateur
     private $type;
 
     /**
-     * @ORM\Column(type="binary")
+     * @ORM\Column(type="boolean")
      */
     private $activer;
 
