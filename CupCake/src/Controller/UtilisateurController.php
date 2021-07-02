@@ -252,4 +252,41 @@ class UtilisateurController extends AbstractController
         }  
     }
 
+    /**
+     * @Route("/utilisateur/upload", name="upload_utilisateur")
+     */
+    public function uploadimgutilisateur(): Response
+    {
+        try{
+            //uploads user image; returns image path or base64
+            //check image using VirusTotal API
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }  
+    }
+
+    /**
+     * @Route("/utilisateur/statistique", name="statistique_utilisateur")
+     */
+    public function statistiqueutilisateur(): Response
+    {
+        try{
+            //returns graph of number of users and their types; graph showing user growth per day
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }  
+    }
+
+    /**
+     * @Route("/utilisateur/export", name="export_utilisateur")
+     */
+    public function exportutilisateur(): Response
+    {
+        try{
+            //returns a zip link that expires in 24 hours, containning all user details (excel) and images
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }  
+    }
+
 }
