@@ -209,7 +209,7 @@ class UtilisateurController extends AbstractController
             }
             if (!$u) return new Response(json_encode(array('resultat' => 1005))); //user not found
             if ($password!==$u->getPassword()) return new Response(json_encode(array('resultat' => 1004))); //login failed
-
+            //set session and auth token
             return new Response(json_encode(array('resultat' => '0')));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));

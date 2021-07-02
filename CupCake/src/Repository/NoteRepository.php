@@ -47,4 +47,16 @@ class NoteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAvgCustom($id, $ctype)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT AVG(n.note)
+            FROM App\Entity\Note n
+            WHERE n.cible=:id AND n.cibletype=:ctype'
+        )->setParameter('id', $id)->setParameter('ctype', $ctype);
+        return $query->getOneOrNullResult();
+    }
 }

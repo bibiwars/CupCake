@@ -70,8 +70,10 @@ class NoteController extends AbstractController
     public function patisserienotes(int $id, Request $request, SerializerInterface $seralizer): Response
     {
         try{
-            // finds note of patisserie
-            return new Response(json_encode(array('resultat' => '0')));
+            $n = $this->getDoctrine()->getRepository(Note::class)->findAvgCustom($id, 'Patisserie');
+            if (!$n) return new Response(json_encode(array('resultat' => '1')));
+            $jsonContent = $seralizer->serialize($n, "json");
+            return new Response($jsonContent);
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }
@@ -83,8 +85,10 @@ class NoteController extends AbstractController
     public function produitnotes(int $id, Request $request, SerializerInterface $seralizer): Response
     {
         try{
-            // finds note of produit
-            return new Response(json_encode(array('resultat' => '0')));
+            $n = $this->getDoctrine()->getRepository(Note::class)->findAvgCustom($id, 'Produit');
+            if (!$n) return new Response(json_encode(array('resultat' => '1')));
+            $jsonContent = $seralizer->serialize($n, "json");
+            return new Response($jsonContent);
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }

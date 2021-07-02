@@ -30,7 +30,7 @@ class Note
     private $utilisateur;
 
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="integer")
      */
     private $cible;
 
