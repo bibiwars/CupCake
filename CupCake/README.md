@@ -14,3 +14,4 @@
         1008: cibleid value invalid
         1009: note value invalid
         1010: invalid OTP
+        1011: invalid image

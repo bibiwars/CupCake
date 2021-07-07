@@ -10,9 +10,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
+use VirusTotal;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+
 
 class UtilisateurController extends AbstractController
 {
@@ -236,7 +242,6 @@ class UtilisateurController extends AbstractController
     public function resetutilisateur(string $user, Request $request, MailerInterface $mailer): Response
     {
         try{
-            //resets user password using otp
             if(strpos($user, '@') !== false){
                 $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail($user);
             }else{
@@ -308,14 +313,65 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/utilisateur/upload", name="upload_utilisateur")
      */
-    public function uploadimgutilisateur(): Response
+    public function uploadimgutilisateur(Request $request, HttpClientInterface $client): Response
     {
         try{
             //uploads user image; returns image path or base64
             //check image using VirusTotal API
+            $img = $request->files->get('img');
+
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $ext = $img->guessExtension();
+                if (!in_array(strtolower($ext), array("jpg", "png")))
+                    return new Response(json_encode(array('resultat' => '1011'))); //invalid image
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$ext;
+                try {
+                    $img->move(
+                        $this->getParameter('userimgs_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+                $file = new VirusTotal\File($this->getParameter('VirusTotalApiKey'));
+                $resp = $file->scan($this->getParameter('userimgs_directory').'/'.$newFilename);
+                $hash = $resp['sha1'];
+
+                $post = array('apikey' => $this->getParameter('VirusTotalApiKey'),'resource'=> $hash);
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://www.virustotal.com/vtapi/v2/file/report');
+                curl_setopt($ch, CURLOPT_POST,1);
+                curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate');
+                curl_setopt($ch, CURLOPT_USERAGENT, "gzip, My php curl client");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+                $result=curl_exec ($ch);
+                $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                print("status = $status_code\n");
+                if ($status_code == 200) {
+                    $js = json_decode($result, true);
+                    print_r($js);
+                } else {
+                    print($result);
+                }
+                curl_close ($ch);
+                
+                if (1==1/*not file is clean*/){
+                    //$u = $this->authzutilisateur();
+                    $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail('baha1000@hotmail.fr');
+                    $u->setImage($newFilename);
+                    $m = $this->getDoctrine()->getManager();
+                    $m->flush();
+                }
+            }
+            
+
+            return new Response(json_encode(array('resultat' => $hash)));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }  
+        }
     }
 
     /**

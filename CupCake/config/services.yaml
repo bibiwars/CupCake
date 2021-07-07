@@ -4,7 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    userimgs_directory: '%kernel.project_dir%/public/uploads/userimgs'
+    VirusTotalApiKey: 'd3b019faf332ed423071d09fa73604daf95456cf63a79df3a70063fcf250136a'
 
+    
 services:
     # default configuration for services in *this* file
     _defaults:
