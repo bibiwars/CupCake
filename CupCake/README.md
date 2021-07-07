@@ -13,3 +13,4 @@
         1007: cibletype value invalid
         1008: cibleid value invalid
         1009: note value invalid
+        1010: invalid OTP

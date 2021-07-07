@@ -11,6 +11,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -229,15 +231,66 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateur/reset", name="reset_utilisateur")
+     * @Route("/utilisateur/reset/{user}", name="reset_utilisateur")
      */
-    public function resetutilisateur(): Response
+    public function resetutilisateur(string $user, Request $request, MailerInterface $mailer): Response
     {
         try{
             //resets user password using otp
+            if(strpos($user, '@') !== false){
+                $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail($user);
+            }else{
+                $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByUsername($user);
+            }
+            if (!$u) return new Response(json_encode(array('resultat' => 1005))); //user not found
+            $otp = random_int(100000, 999999);;
+            $u->setToken($otp);
+            $m = $this->getDoctrine()->getManager();
+            $m->flush();
+            
+            $email = (new Email())
+            ->from('pived.icsr@gmail.com')
+            ->to($u->getEmail())
+            ->subject('CupCake Password reset')
+            ->text('Account: '.$otp.' is your CupCake account verification code');
+            $mailer->send($email);
+            
+            return new Response(json_encode(array('resultat' => '0')));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }  
+        }
+    }
+
+    /**
+     * @Route("/utilisateur/resetpass/{user}", name="resetPassword_utilisateur")
+     */
+    public function resetPassword(string $user, Request $request): Response
+    {
+        try{
+            if(strpos($user, '@') !== false){
+                $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail($user);
+            }else{
+                $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByUsername($user);
+            }
+            if (!$u) return new Response(json_encode(array('resultat' => 1005))); //user not found
+            $data = json_decode($request->getContent(), true);
+            $otp = isset($data['otp']) ? $data['otp'] : null;
+            $password = isset($data['password']) ? $data['password'] : null;
+            $passwordre = isset($data['passwordre']) ? $data['passwordre'] : null;
+            if($password==null || $password!==$passwordre || $otp!==$u->getToken()){
+                if ($password==null) $code = 1001; //password value empty
+                if ($password!==$passwordre) $code = 1002; //password verification does not match
+                if ($otp!==$u->getToken()) $code = 1003; //otp invalid
+                return new Response(json_encode(array('resultat' => $code)));
+            }
+            $u->setPassword($password);
+            $u->setToken(13371337);
+            $m = $this->getDoctrine()->getManager();
+            $m->flush();
+            return new Response(json_encode(array('resultat' => '0')));
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }
     }
 
     /**
