@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  */
-class Utilisateur
+class Utilisateur implements UserInterface,\Serializable
 {
     /**
      * @ORM\Id
@@ -81,7 +81,7 @@ class Utilisateur
     private $notes;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $token;
 
@@ -269,9 +269,9 @@ class Utilisateur
         $this->setTel($e);
         $this->setUsername($f);
         $this->setPassword($g);
-        $this->settype($h);
-        $this->setactiver($i);
-        $this->setimage($j);
+        $this->setType($h);
+        $this->setActiver($i);
+        $this->setImage($j);
     }
 
     public function getToken(): ?string
@@ -285,5 +285,36 @@ class Utilisateur
 
         return $this;
     }
+
+    public function getRoles(){
+        return [$this->getType()];
+    }
+
+    public function getSalt(){
+        return null;
+    }
+
+    public function eraseCredentials(){
+
+    }
+
+    public function serialize(){
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password
+        ]);
+    }
+    public function unserialize($serialized){
+        list(
+            $this->id,
+            $this->username,
+            $this->password
+        ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+
+
+
 
 }

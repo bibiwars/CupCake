@@ -17,6 +17,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 
 
@@ -33,22 +35,24 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/utilisateur/ajouter", name="ajout_utilisateur")
      */
-    public function ajoututilisateur(Request $request, SerializerInterface $seralizer): Response
+    public function ajoututilisateur(Request $request, SerializerInterface $seralizer, UserPasswordEncoderInterface $encoder): Response
     {
-        try{
+        //try{
             $data = $request->getContent();
             $u = $seralizer->deserialize($data, Utilisateur::class, 'json');
             // check field values
             // check for user type
             $u->setDateCreation(new \DateTime('now'));
             $u->setActiver("true");
+            $u->setToken("1333333333337");
+            $u->setPassword($encoder->encodePassword($u, $u->getPassword()));
             $m = $this->getDoctrine()->getManager();
             $m->persist($u);
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
-        }catch(\Throwable $throwable){
+        /*}catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }
+        }*/
         
     }
 
@@ -157,7 +161,7 @@ class UtilisateurController extends AbstractController
                 if ($oldpassword!==$u->getPassword()) $code = 1003; //old password does not match
                 return new Response(json_encode(array('resultat' => $code)));
             }
-            $u->setPassword($password);
+            $u->setPassword($encoder->encodePassword($u, $password));
             $m = $this->getDoctrine()->getManager();
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
@@ -199,7 +203,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateur/login", name="login_utilisateur")
+     * @Route("/login", name="login_utilisateur")
      */
     public function loginutilisateur(Request $request, SerializerInterface $seralizer): Response
     {
@@ -225,14 +229,14 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/utilisateur/logout", name="logout_utilisateur")
+     * @Route("/logout", name="app_logout")
      */
-    public function logoututilisateur(): Response
+    public function logoututilisateur(): void
     {
         try{
             //deletes user session
         }catch(\Throwable $throwable){
-            return new Response(json_encode(array('resultat' => '1')));
+            //return new Response(json_encode(array('resultat' => '1')));
         }  
     }
 

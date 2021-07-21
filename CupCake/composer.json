@@ -13,6 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
         "jayzeng/virustotalapi": "dev-master",
+        "lexik/jwt-authentication-bundle": "^2.12",
         "phpdocumentor/reflection-docblock": "^5.2",
         "symfony/asset": "4.4.*",
         "symfony/console": "*",
