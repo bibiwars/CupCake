@@ -15,3 +15,4 @@
         1009: note value invalid
         1010: invalid OTP
         1011: invalid image
+        1012: weak password

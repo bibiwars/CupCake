@@ -1,39 +1,44 @@
 security:
-    # ...
+    encoders:
+        App\Entity\Utilisateur:
+            algorithm: bcrypt
+            cost: 12
+
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
+    
     firewalls:
         login:
-            pattern:  ^/api/login
+            pattern:  ^/login
             stateless: true
             anonymous: true
             json_login:
                 provider: app_user_provider
-                check_path: /api/login_check
+                check_path: /login_check
                 username_path: email
                 password_path: password
-                success_handler:        lexik_jwt_authentication.handler.authentication_success
-                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            
 
         api:
-            pattern:   ^/api
+            pattern:   ^/
             stateless: true
+            anonymous: ~
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-
-
-    access_control:
-        - { path: ^/utilisateur/liste, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/,       roles: IS_AUTHENTICATED_FULLY }
-        
+            logout:
+                path: app_logout
+                target: utilisateur
     
-    encoders:
-      App\Entity\Utilisateur:
-          algorithm: bcrypt
-          cost: 12
+    access_control:
+        - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/utilisateur/reset', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/utilisateur/resetpass', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/utilisateur/ajouter', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/', roles: ROLE_USER}
+    

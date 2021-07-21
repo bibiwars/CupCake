@@ -12,6 +12,7 @@ use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use App\Entity\Note;
 use App\Repository\NoteRepository;
+use Symfony\Component\Security\Core\Security;
 /*use App\Entity\Patisserie;
 use App\Repository\PatisserieRepository;
 use App\Entity\Produit;
@@ -25,13 +26,13 @@ class NoteController extends AbstractController
      */
     public function index(): Response
     {
-        return new Response(json_encode(array('resultat' => '1')));
+        return new Response(json_encode(array('resultat' => '100000')));
     }
 
     /**
      * @Route("/note/ajouter", name="ajout_note")
      */
-    public function ajoutnote(Request $request, SerializerInterface $seralizer): Response
+    public function ajoutnote(Request $request, SerializerInterface $seralizer, Security $security): Response
     {
         try{
             $data = json_decode($request->getContent(), true);
@@ -48,11 +49,8 @@ class NoteController extends AbstractController
                 $cible = $this->getDoctrine()->getRepository(Produit::class)->findOneById($cibleid);
             }
             if (!$cible) return new Response(json_encode(array('resultat' => 1008))); //cibleid value invalid*/
-            
-            $userid = 5; // get userid from session; CHANGE THIS CODE
-            if ($userid==-1) return new Response(json_encode(array('resultat' => 1000))); //unauthorized
-            $user = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($userid);
-            
+
+            $user = $security->getUser();
             $n = new Note($note, $user, $cibleid, $cibletype);
             $m = $this->getDoctrine()->getManager();
             $m->persist($n);

@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'e64accc8c07bb8d04ef9d470075a5110b8d8bfed',
+        'reference' => '57db3b10e8a3fd10a89cfea2c6d8228ffedf4d8d',
         'name' => 'symfony/skeleton',
         'dev' => true,
     ),
@@ -927,7 +927,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'e64accc8c07bb8d04ef9d470075a5110b8d8bfed',
+            'reference' => '57db3b10e8a3fd10a89cfea2c6d8228ffedf4d8d',
             'dev_requirement' => false,
         ),
         'symfony/stopwatch' => array(

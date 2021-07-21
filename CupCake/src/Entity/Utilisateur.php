@@ -3,15 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  */
-class Utilisateur implements UserInterface,\Serializable
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id
@@ -21,19 +19,30 @@ class Utilisateur implements UserInterface,\Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -46,24 +55,14 @@ class Utilisateur implements UserInterface,\Serializable
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $username;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private $username;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $date_creation;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
 
     /**
      * @ORM\Column(type="boolean")
@@ -76,23 +75,89 @@ class Utilisateur implements UserInterface,\Serializable
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="utilisateur")
-     */
-    private $notes;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $token;
 
-    public function __construct()
-    {
-        $this->notes = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getNom(): ?string
@@ -100,7 +165,7 @@ class Utilisateur implements UserInterface,\Serializable
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -112,21 +177,9 @@ class Utilisateur implements UserInterface,\Serializable
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
@@ -155,26 +208,9 @@ class Utilisateur implements UserInterface,\Serializable
         return $this;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
     public function setUsername(string $username): self
     {
         $this->username = $username;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }
@@ -191,24 +227,12 @@ class Utilisateur implements UserInterface,\Serializable
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getActiver()
+    public function getActiver(): ?bool
     {
         return $this->activer;
     }
 
-    public function setActiver($activer): self
+    public function setActiver(bool $activer): self
     {
         $this->activer = $activer;
 
@@ -227,53 +251,6 @@ class Utilisateur implements UserInterface,\Serializable
         return $this;
     }
 
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->removeElement($note)) {
-            // set the owning side to null (unless already changed)
-            if ($note->getUtilisateur() === $this) {
-                $note->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    // Custom
-
-    public function initUtilisateur(String $a, String $b, String $c, String $d, String $e, String $f, String $g, String $h, int $i, String $j)
-    {
-        $this->setNom($a);
-        $this->setPrenom($b);
-        $this->setEmail($c);
-        $this->setAdresse($d);
-        $this->setTel($e);
-        $this->setUsername($f);
-        $this->setPassword($g);
-        $this->setType($h);
-        $this->setActiver($i);
-        $this->setImage($j);
-    }
-
     public function getToken(): ?string
     {
         return $this->token;
@@ -285,36 +262,4 @@ class Utilisateur implements UserInterface,\Serializable
 
         return $this;
     }
-
-    public function getRoles(){
-        return [$this->getType()];
-    }
-
-    public function getSalt(){
-        return null;
-    }
-
-    public function eraseCredentials(){
-
-    }
-
-    public function serialize(){
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password
-        ]);
-    }
-    public function unserialize($serialized){
-        list(
-            $this->id,
-            $this->username,
-            $this->password
-        ) = unserialize($serialized, ['allowed_classes' => false]);
-    }
-
-
-
-
-
 }

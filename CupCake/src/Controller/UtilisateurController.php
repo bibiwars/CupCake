@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 
 
 
@@ -29,7 +30,7 @@ class UtilisateurController extends AbstractController
      */
     public function index(): Response
     {
-        return new Response(json_encode(array('resultat' => '1')));
+        return new Response(json_encode(array('resultat' => 'Home')));
     }
 
     /**
@@ -37,11 +38,16 @@ class UtilisateurController extends AbstractController
      */
     public function ajoututilisateur(Request $request, SerializerInterface $seralizer, UserPasswordEncoderInterface $encoder): Response
     {
-        //try{
+        try{
             $data = $request->getContent();
             $u = $seralizer->deserialize($data, Utilisateur::class, 'json');
-            // check field values
-            // check for user type
+            // TODO check field values
+            $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password);
+            if(!$strongpass){
+                if (!$strongpass) $code = 1012; //weak password
+                return new Response(json_encode(array('resultat' => $code)));
+            }
+            // TODO check for user type
             $u->setDateCreation(new \DateTime('now'));
             $u->setActiver("true");
             $u->setToken("1333333333337");
@@ -50,9 +56,9 @@ class UtilisateurController extends AbstractController
             $m->persist($u);
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
-        /*}catch(\Throwable $throwable){
+        }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }*/
+        }
         
     }
 
@@ -64,14 +70,16 @@ class UtilisateurController extends AbstractController
         try{
             $data = $request->getContent();
             $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($id);
+            $u_back = $u;
             $seralizer->deserialize($data, Utilisateur::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $u]);
-            // check field values
+            // TODO check field values
+            // TODO disable activer and password, etc
             $m = $this->getDoctrine()->getManager();
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }  
+        }
     }
 
     /**
@@ -147,7 +155,7 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/utilisateur/changerpass/{id}", name="changerPassword_utilisateur")
      */
-    public function changerPassword(int $id, Request $request, SerializerInterface $seralizer): Response
+    public function changerPassword(int $id, Request $request, SerializerInterface $seralizer, UserPasswordEncoderInterface $encoder): Response
     {
         try{
             $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($id);
@@ -155,10 +163,12 @@ class UtilisateurController extends AbstractController
             $oldpassword = isset($data['oldpassword']) ? $data['oldpassword'] : null;
             $password = isset($data['password']) ? $data['password'] : null;
             $passwordre = isset($data['passwordre']) ? $data['passwordre'] : null;
-            if($password==null || $password!==$passwordre || $oldpassword!==$u->getPassword()){
+            $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password);
+            if($password==null || $password!==$passwordre || !$encoder->isPasswordValid($u, $oldpassword) || !$strongpass){
                 if ($password==null) $code = 1001; //password value empty
                 if ($password!==$passwordre) $code = 1002; //password verification does not match
-                if ($oldpassword!==$u->getPassword()) $code = 1003; //old password does not match
+                if (!$encoder->isPasswordValid($u, $oldpassword)) $code = 1003; //old password does not match
+                if (!$strongpass) $code = 1012; //weak password
                 return new Response(json_encode(array('resultat' => $code)));
             }
             $u->setPassword($encoder->encodePassword($u, $password));
@@ -208,7 +218,7 @@ class UtilisateurController extends AbstractController
     public function loginutilisateur(Request $request, SerializerInterface $seralizer): Response
     {
         try{
-            $data = json_decode($request->getContent(), true);
+            /*$data = json_decode($request->getContent(), true);
             $user = isset($data['user']) ? $data['user'] : null;
             $password = isset($data['password']) ? $data['password'] : null;
             
@@ -221,8 +231,8 @@ class UtilisateurController extends AbstractController
             }
             if (!$u) return new Response(json_encode(array('resultat' => 1005))); //user not found
             if ($password!==$u->getPassword()) return new Response(json_encode(array('resultat' => 1004))); //login failed
-            //set session and auth token
-            return new Response(json_encode(array('resultat' => '0')));
+            //set session and auth token*/
+            return new Response(json_encode(array('resultat' => '1')));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }
@@ -231,13 +241,9 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logoututilisateur(): void
+    public function logoututilisateur(): Response
     {
-        try{
-            //deletes user session
-        }catch(\Throwable $throwable){
-            //return new Response(json_encode(array('resultat' => '1')));
-        }  
+        return new Response(json_encode(array('resultat' => '0')));
     }
 
     /**
@@ -273,7 +279,7 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/utilisateur/resetpass/{user}", name="resetPassword_utilisateur")
      */
-    public function resetPassword(string $user, Request $request): Response
+    public function resetPassword(string $user, Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         try{
             if(strpos($user, '@') !== false){
@@ -286,13 +292,16 @@ class UtilisateurController extends AbstractController
             $otp = isset($data['otp']) ? $data['otp'] : null;
             $password = isset($data['password']) ? $data['password'] : null;
             $passwordre = isset($data['passwordre']) ? $data['passwordre'] : null;
-            if($password==null || $password!==$passwordre || $otp!==$u->getToken()){
+            
+            $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password);
+            if($password==null || $password!==$passwordre || $otp!==$u->getToken() || !$strongpass){
                 if ($password==null) $code = 1001; //password value empty
                 if ($password!==$passwordre) $code = 1002; //password verification does not match
                 if ($otp!==$u->getToken()) $code = 1003; //otp invalid
+                if (!$strongpass) $code = 1012; //weak password
                 return new Response(json_encode(array('resultat' => $code)));
             }
-            $u->setPassword($password);
+            $u->setPassword($encoder->encodePassword($u, $password));
             $u->setToken(13371337);
             $m = $this->getDoctrine()->getManager();
             $m->flush();
@@ -302,26 +311,13 @@ class UtilisateurController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/utilisateur/authz", name="authz_utilisateur")
-     */
-    public function authzutilisateur(): Response
-    {
-        try{
-            //checks authentication; returns userid
-        }catch(\Throwable $throwable){
-            return new Response(json_encode(array('resultat' => '1')));
-        }  
-    }
 
     /**
      * @Route("/utilisateur/upload", name="upload_utilisateur")
      */
-    public function uploadimgutilisateur(Request $request, HttpClientInterface $client): Response
+    public function uploadimgutilisateur(Request $request, HttpClientInterface $client, Security $security): Response
     {
         try{
-            //uploads user image; returns image path or base64
-            //check image using VirusTotal API
             $img = $request->files->get('img');
 
             if ($img) {
@@ -362,9 +358,8 @@ class UtilisateurController extends AbstractController
                 }
                 curl_close ($ch);
                 
-                if (1==1/*not file is clean*/){
-                    //$u = $this->authzutilisateur();
-                    $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail('baha1000@hotmail.fr');
+                if (1==1/* TODO not file is clean*/){
+                    $u = $security->getUser();
                     $u->setImage($newFilename);
                     $m = $this->getDoctrine()->getManager();
                     $m->flush();
@@ -384,7 +379,7 @@ class UtilisateurController extends AbstractController
     public function statistiqueutilisateur(): Response
     {
         try{
-            //returns graph of number of users and their types; graph showing user growth per day
+            // TODO returns graph of number of users and their types; graph showing user growth per day
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }  
@@ -396,7 +391,7 @@ class UtilisateurController extends AbstractController
     public function exportutilisateur(): Response
     {
         try{
-            //returns a zip link that expires in 24 hours, containning all user details (excel) and images
+            // TODO returns a zip link that expires in 24 hours, containning all user details (excel) and images
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }  
