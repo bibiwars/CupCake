@@ -1,0 +1,11 @@
+<h2>Login page</h2>
+<form #f="ngForm">
+
+  <br><label>Email</label><br>
+  <input type="email" placeholder="Email" required  ngModel #id="ngModel" name="email">
+
+  <br><label>Password</label><br>
+  <input type="password" placeholder="Password" ngModel #id="ngModel" name="password">
+
+  <br><input [disabled]="f.invalid" type="submit" value="Submit" (click)="Login(f.value)" class="btn btn-primary">
+</form>
