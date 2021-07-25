@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Cupcake - Login</title>
+    <title>Cupcake - Register</title>
 
     <script src="cdn-cgi/apps/head/sxN6HgCn8v7CG45Nsym8imDXilk.js"></script><link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
@@ -38,8 +38,8 @@
 <div class="ct-shopMenuMobile">
     <nav class="ct-shopMenuMobile-navbar">
         <ul class="list-unstyled">
-            <li class="active"><a href="/login">S'authentifier</a></li>
-            <li><a href="/register">S'inscrire</a></li>
+            <li><a href="/login">S'authentifier</a></li>
+            <li class="active"><a href="/register">S'inscrire</a></li>
         </ul>
     </nav>
 </div>
@@ -65,8 +65,8 @@
                <div class="col-sm-6">
                    <nav class="ct-topBar-navigation pull-left">
                        <ul class="list-unstyled list-inline">
-                           <li class="active"><a href="/login">S'authentifier</a></li>
-                           <li><a href="/register">S'inscrire</a></li>
+                           <li><a href="/login">S'authentifier</a></li>
+                           <li class="active"><a href="/register">S'inscrire</a></li>
                        </ul>
                    </nav>
                </div>
@@ -102,7 +102,7 @@
         <div class="container">
             <div class="text-center ct-u-paddingBottom60">
                 <h2 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
-                    S'authentifier
+                    S'inscrire
                 </h2>
             </div>
             <div class="row col-xs-4 col-xs-offset-4">
@@ -123,19 +123,100 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
-                                                <input id="email" placeholder="Email" required type="email" name="email"
+                                                <input id="nom" placeholder="Nom" required type="text" name="nom"
                                                        class="form-control" autofocus="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group ">
+                                                <input id="prenom" placeholder="Prenom" required type="text" name="prenom"
+                                                       class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group ">
+                                                <input id="adresse" placeholder="Adreese" required type="text" name="adresse"
+                                                       class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group ">
+                                                <input id="tel" placeholder="Numéro téléphone" required type="number" name="tel"
+                                                       class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group ">
+                                                <input id="email" placeholder="Email" required type="email" name="email"
+                                                       class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group ">
+                                                <input id="username" placeholder="Nom d'utilisateur" required type="text" name="username"
+                                                       class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <input id="password" placeholder="Mot de passe" required type="password" name="password"
                                                        class="form-control">
-                                                       <a style="margin-left: 5px" href="/reset">Mot de passe oublié?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group">
+                                                <input id="passwordre" placeholder="Vérification Mot de passe" required type="password" name="passwordre"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-12">
+                                            <div class="form-group">
+                                                <select id="type" placeholder="Type d'utilisateur" required name="type"
+                                                       class="form-control">
+                                                    <option>Client</option>
+                                                    <option>Patissier</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +226,7 @@
                                 <div class="col-xs-12 text-center">
                                     <button type="submit"
                                             class="btn btn-purple text-uppercase">
-                                        Authentifier
+                                        S'inscrire
                                     </button>
                                 </div>
                             </div>

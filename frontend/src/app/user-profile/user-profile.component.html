@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Cupcake - Login</title>
+    <title>Cupcake - Profile</title>
 
     <script src="cdn-cgi/apps/head/sxN6HgCn8v7CG45Nsym8imDXilk.js"></script><link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
@@ -38,8 +38,9 @@
 <div class="ct-shopMenuMobile">
     <nav class="ct-shopMenuMobile-navbar">
         <ul class="list-unstyled">
-            <li class="active"><a href="/login">S'authentifier</a></li>
-            <li><a href="/register">S'inscrire</a></li>
+            <li class="active"><a href="/profile/nox">Profile</a></li>
+            <li><a href="/settings">Compte</a></li>
+            <li><a href="/logout">Déconnecter</a></li>
         </ul>
     </nav>
 </div>
@@ -65,8 +66,9 @@
                <div class="col-sm-6">
                    <nav class="ct-topBar-navigation pull-left">
                        <ul class="list-unstyled list-inline">
-                           <li class="active"><a href="/login">S'authentifier</a></li>
-                           <li><a href="/register">S'inscrire</a></li>
+                           <li class="active"><a href="/profile">Profile</a></li>
+                           <li><a href="/settings">Compte</a></li>
+                           <li><a href="/logout">Déconnecter</a></li>
                        </ul>
                    </nav>
                </div>
@@ -98,63 +100,128 @@
         </div>
     </header>
 
-    <section class="ct-u-paddingTop100 ct-u-paddingBottom70 ct-u-backgroundGray">
+<section class="ct-u-paddingTop100 ct-u-paddingBottom40 ct-u-backgroundGray">
         <div class="container">
-            <div class="text-center ct-u-paddingBottom60">
-                <h2 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
-                    S'authentifier
-                </h2>
+            <div class="text-center ct-u-paddingBottom80">
+                <h4 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
+                    Profile de XX YY
+                </h4>
             </div>
-            <div class="row col-xs-4 col-xs-offset-4">
-                <div class="col-sm-12 ct-u-paddingTop20">
-                    <div class="ct-contactForm">
-                        <div class="successMessage alert alert-success" style="display: none">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            Bienvenue!
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="ct-personBox ct-personBox--thumb ct-personBox--primary">
+                        <div class="ct-personBox-image">
+                            <img src="/assets/images/demo-content/person1.jpg" alt="Person">
                         </div>
-                        <div class="errorMessage alert alert-danger" style="display: none">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            Oups! Une erreur s'est produite. Veuillez réessayer.
+                        <a href="#" class="ct-personBox-name">
+                            XX YY
+                        </a>
+                        <div class="ct-personBox-description">
+                            <div class="ct-u-moustache"></div>
                         </div>
-                        <form role="form" action="" method="post" class="contactForm validateIt"
-                              data-show-errors="true">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-12">
-                                            <div class="form-group ">
-                                                <input id="email" placeholder="Email" required type="email" name="email"
-                                                       class="form-control" autofocus="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-12">
-                                            <div class="form-group">
-                                                <input id="password" placeholder="Mot de passe" required type="password" name="password"
-                                                       class="form-control">
-                                                       <a style="margin-left: 5px" href="/reset">Mot de passe oublié?</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><br>
-                            <div class="row">
-                                <div class="col-xs-12 text-center">
-                                    <button type="submit"
-                                            class="btn btn-purple text-uppercase">
-                                        Authentifier
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <h5 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
+                        À propos de moi
+                    </h5>
+                    <div class="ct-u-paddingTop40 ct-u-paddingBottom50">
+                        <p>Chef XX YY received training at New York’s Culinary Institute and opened her own pastry shop.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <div class="ct-divided ct-divider--primary ct-u-marginBottom100">
+    <div class="container">
+    <div class="col-md-5 ct-u-paddingTop40 ct-u-paddingBottom30">
+        <h3 class="text-uppercase ct-u-marginBottom50">Quelques chiffres</h3>
+        <div class="flexslider ct-js-flexslider ct-flexslider--arrowType2" data-animationloop="false" data-directionnav="true" data-controlnav="false">
+            <ul class="slides">
+                <li>
+                    <div class="ct-iconBox ct-iconBox--type2 ct-iconBox--primary">
+                        <div class="ct-iconBox-icon">
+                            <i class="fa fa-fw fa-camera"></i>
+                        </div>
+                        <div class="ct-iconBox-content">
+                             <span class="ct-iconBox-counter ct-js-counter"
+                                   data-ct-to="2135" data-ct-speed="5000">0</span>
+                            <p class="ct-iconBox-description text-uppercase ct-fw-600">
+                                Commandes passées/reçues
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ct-iconBox ct-iconBox--type2 ct-iconBox--primary">
+                        <div class="ct-iconBox-icon">
+                            <i class="fa fa-fw fa-heart"></i>
+                        </div>
+                        <div class="ct-iconBox-content">
+                             <span class="ct-iconBox-counter ct-js-counter"
+                                   data-ct-to="76432" data-ct-speed="5000">0</span>
+                            <p class="ct-iconBox-description text-uppercase ct-fw-600">
+                                Participations au competitions 
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ct-iconBox ct-iconBox--type2 ct-iconBox--primary">
+                        <div class="ct-iconBox-icon">
+                            <i class="fa fa-fw fa-map-marker"></i>
+                        </div>
+                        <div class="ct-iconBox-content">
+                             <span class="ct-iconBox-counter ct-js-counter"
+                                   data-ct-to="171" data-ct-speed="10000">0</span>
+                            <p class="ct-iconBox-description text-uppercase ct-fw-600">
+                                Competitions gagnés
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-offset-1 ct-u-paddingTop40">
+        <div class="panel-group ct-accordion-type2" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fa fa-fw fa-cutlery"></i> Meilleure recette
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        My best recipe for pancakes:<br>
+                        1 cup flour<br>
+                        2 tablespoons sugar<br>
+                        2 teaspoons baking powder<br>
+                        1/2 teaspoon salt<br>
+                        1 cup milk<br>
+                        2 tablespoons melted butter<br>
+                        2 eggs<br>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fa fa-fw fa-pencil"></i> contact
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <a href="https://www.facebook.com/bibiwars" style="color: white">Facebook</a><br>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    </div>
+    </div>
 
     <footer class="ct-u-paddingTop30">
         <div class="container">
@@ -252,6 +319,12 @@
 
 <script src="/assets/js/ct-mediaSection/jquery.stellar.min.js"></script>
 <script src="/assets/js/ct-mediaSection/init.js"></script>
+
+<script src="/assets/js/flexslider/jquery.flexslider-min.js"></script>
+<script src="/assets/js/flexslider/init.js"></script>
+
+<script src="/assets/js/counter/jquery.countTo.js"></script>
+<script src="/assets/js/counter/init.js"></script>
 
 
 
