@@ -116,7 +116,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             Oups! Une erreur s'est produite. Veuillez réessayer.
                         </div>
-                        <form role="form" action="" method="post" class="contactForm validateIt"
+                        <form #f="ngForm" role="form" action="" method="post" class="contactForm validateIt"
                               data-show-errors="true">
                             <div class="row">
                                 <div class="col-md-12">
@@ -124,7 +124,7 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="email" placeholder="Email" required type="email" name="email"
-                                                       class="form-control" autofocus="">
+                                                       class="form-control" autofocus="" ngModel #id="ngModel">
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <input id="password" placeholder="Mot de passe" required type="password" name="password"
-                                                       class="form-control">
+                                                       class="form-control" ngModel #id="ngModel">
                                                        <a style="margin-left: 5px" href="/reset">Mot de passe oublié?</a>
                                             </div>
                                         </div>
@@ -143,10 +143,8 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <button type="submit"
-                                            class="btn btn-purple text-uppercase">
-                                        Authentifier
-                                    </button>
+                                    <input type="submit" value="Authentifier"
+                                            class="btn btn-purple text-uppercase" [disabled]="f.invalid" (click)="Login(f.value)">
                                 </div>
                             </div>
                         </form>

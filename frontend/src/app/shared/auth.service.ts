@@ -11,4 +11,9 @@ export class AuthService {
   Login(d:any){
     return this.Http.post('http://localhost:8001/login_check', d);
   }
+
+  DeactivateUser(id: number){
+    return this.Http.get('http://localhost:8001/logout');
+  }
+
 }

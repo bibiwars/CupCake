@@ -12,10 +12,13 @@ export class LoginComponent implements OnInit {
   constructor(private serviceAuth: AuthService) { }
 
   ngOnInit(): void { }
-
   Login(d:any) {
     this.serviceAuth.Login(d).subscribe(
-      (data) => { alert(data) }
+      (data) => {
+        alert(data);
+        // if invalid: return an error
+        // else: localStorage.setItem('jwt', JSON.stringify(response));
+      }
     );
   }
 

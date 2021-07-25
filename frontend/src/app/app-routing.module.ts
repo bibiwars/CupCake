@@ -7,6 +7,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserResetComponent } from './user-reset/user-reset.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UserActivateComponent } from './user-activate/user-activate.component';
+import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
 
 const routes: Routes = [
 	{
@@ -43,6 +46,21 @@ const routes: Routes = [
 		path: 'admin/users',
 		component: AdminUsersComponent,
 		data: { title: 'AdminUsers' }
+	},
+	{
+		path: 'u/activate',
+		component: UserActivateComponent,
+		data: { title: 'UserActivate' }
+	},
+	{
+		path: 'u/deactivate',
+		component: UserDeactivateComponent,
+		data: { title: 'UserDeactivate' }
+	},
+	{
+		path: 'u/delete',
+		component: UserDeleteComponent,
+		data: { title: 'UserDelete' }
 	},
   	{
 		path: '**',

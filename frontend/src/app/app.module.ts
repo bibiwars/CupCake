@@ -12,6 +12,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { LogoutComponent } from './logout/logout.component';
+import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { UserActivateComponent } from './user-activate/user-activate.component';
+import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { UserRegisterComponent } from './user-register/user-register.component';
     UserProfileComponent,
     AdminUserComponent,
     AdminUsersComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    LogoutComponent,
+    UserDeleteComponent,
+    UserActivateComponent,
+    UserDeactivateComponent
   ],
   imports: [
     BrowserModule,

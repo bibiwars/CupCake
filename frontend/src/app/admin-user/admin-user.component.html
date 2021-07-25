@@ -109,7 +109,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 ct-u-paddingTop20">
-                    <form role="form" action="" method="post" class="contactForm validateIt"
+                    <form #f="ngForm" role="form" action="" method="post" class="contactForm validateIt"
                               data-show-errors="true" name="f2">
                             <div class="row">
                                 <div class="col-md-12">
@@ -136,10 +136,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <button type="submit"
-                                            class="btn btn-purple text-uppercase">
-                                        Changer
-                                    </button>
+                                    <input type="submit" class="btn btn-purple text-uppercase" [disabled]="f.invalid" value="Changer" (click)="updateUser(f.value)">
                                 </div>
                             </div>
                         </form>

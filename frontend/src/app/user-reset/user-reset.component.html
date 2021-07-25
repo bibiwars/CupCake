@@ -118,7 +118,7 @@
                             Oups! Une erreur s'est produite. Veuillez réessayer.
                         </div>
 
-                        <form role="form" action="" method="post" class="contactForm validateIt" name="f1"
+                        <form #f="ngForm" role="form" action="" method="post" class="contactForm validateIt" name="f1"
                               data-show-errors="true" style="display: block;">
                             <div class="row">
                                 <div class="col-md-12">
@@ -126,7 +126,7 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="email" placeholder="Email" required type="email" name="email"
-                                                       class="form-control" autofocus="">
+                                                       class="form-control" autofocus="" ngModel #id="ngModel">
                                             </div>
                                         </div>
                                     </div>
@@ -134,14 +134,12 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <button type="submit"
-                                            class="btn btn-purple text-uppercase">
-                                        Envoyer
-                                    </button>
+                                    <input type="submit"
+                                            class="btn btn-purple text-uppercase" value="Envoyer" [disabled]="f.invalid" (click)="Reset(f.value)">
                                 </div>
                             </div>
                         </form>
-                        <form role="form" action="" method="post" class="contactForm validateIt" name="f2"
+                        <form #ff="ngForm" role="form" action="" method="post" class="contactForm validateIt" name="f2"
                               data-show-errors="true" style="display: block;">
                             <div class="row">
                                 <div class="col-md-12">
@@ -149,19 +147,19 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="otp" placeholder="OTP" required type="number" name="otp"
-                                                       class="form-control" autofocus="">
+                                                       class="form-control" autofocus="" ngModel #id="ngModel">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="password" placeholder="Nouveau Mot de passe" required type="password" name="password"
-                                                       class="form-control" >
+                                                       class="form-control" ngModel #id="ngModel">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="passwordre" placeholder="Vérification Nouveau Mot de passe" required type="password" name="passwordre"
-                                                       class="form-control" >
+                                                       class="form-control" ngModel #id="ngModel">
                                             </div>
                                         </div>
                                     </div>
@@ -169,10 +167,8 @@
                             </div><br>
                             <div class="row">
                                 <div class="col-xs-12 text-center">
-                                    <button type="submit"
-                                            class="btn btn-purple text-uppercase">
-                                        Réinitialiser
-                                    </button>
+                                    <input type="submit"
+                                            class="btn btn-purple text-uppercase" value="Réinitialiser" [disabled]="f.invalid" (click)="Resetpass(f.value)">
                                 </div>
                             </div>
                         </form>
