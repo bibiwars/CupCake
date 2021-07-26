@@ -18,6 +18,18 @@ import { UpdateCompetitionComponent } from './update-competition/update-competit
 import { AjoutPublicationComponent } from './ajout-publication/ajout-publication.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PublicationsComponent } from './publications/publications.component';
+
+import { PublicationComponent } from './publication/publication.component';
+import { AjoutReclamationComponent } from './ajout-reclamation/ajout-reclamation.component';
+import { ReclamationsComponent } from './reclamations/reclamations.component';
+import { ReclamationsAdminComponent } from './reclamations-admin/reclamations-admin.component';
+import { RepondreReclamationsAdminComponent } from './repondre-reclamations-admin/repondre-reclamations-admin.component';
+import { DetailReclamationComponent } from './detail-reclamation/detail-reclamation.component';
+import { StatsComponent } from './stats/stats.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { AvisAdminComponent } from './avis-admin/avis-admin.component';
+import { AjoutAvisComponent } from './ajout-avis/ajout-avis.component';
+
 import { LoginComponent } from './login/login.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UserResetComponent } from './user-reset/user-reset.component';
@@ -29,6 +41,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserActivateComponent } from './user-activate/user-activate.component';
 import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
+
 
 @NgModule({
   declarations: [
@@ -55,13 +68,23 @@ import { UserDeactivateComponent } from './user-deactivate/user-deactivate.compo
     LogoutComponent,
     UserDeleteComponent,
     UserActivateComponent,
-    UserDeactivateComponent
+    UserDeactivateComponent,
+    PublicationComponent,
+    AjoutReclamationComponent,
+    ReclamationsComponent,
+    ReclamationsAdminComponent,
+    RepondreReclamationsAdminComponent,
+    DetailReclamationComponent,
+    StatsComponent,
+    AvisAdminComponent,
+    AjoutAvisComponent
   ],
     imports: [
         AppRoutingModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        GoogleChartsModule,
     ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},],
   bootstrap: [AppComponent]

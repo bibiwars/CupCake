@@ -1,0 +1,19 @@
+<strong>Tous les reclamations </strong>
+<table class="table">
+  <tr>
+    <th>Type</th>
+    <th>Message</th>
+    <th>Etat</th>
+  </tr>
+  <tbody *ngFor="let r of listRec; let i= index">
+  <tr>
+    <td>{{r.type}}</td>
+    <td>{{r.imessage}}</td>
+    <td>{{r.status}}</td>
+    <td *ngIf="r.status === 'traite'">{{r.reponse}}</td>
+    <td *ngIf="r.status === 'non traite'"><a routerLink="/admin/reclamation/repondre/{{r.idReclamation}}" class="btn btn-info">Repondre</a></td>
+    <td *ngIf="r.status === 'non traite'"><button (click)="delete(r.idReclamation)"  class="btn btn-danger">Supprimer</button></td>
+  </tr>
+  </tbody>
+</table>
+<a routerLink="/admin/reclamations/stats">Voir les statistiques</a>

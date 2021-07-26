@@ -1,0 +1,22 @@
+<strong> Type :</strong>
+<h6>   {{reclamation.type}}</h6>
+<strong> Message :</strong>
+<h6>   {{reclamation.imessage}}</h6>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>Reponse</label>
+    <textarea  class="form-control" [(ngModel)]="reclamation.reponse" name="reponse" #d="ngModel" placeholder="le nombre des caracteres ne doit pas depasser 255" required></textarea>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      la Reponse est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Repondre" name="ajouter" [disabled]="f.invalid" (click)="repondre()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+
+
+
+
+

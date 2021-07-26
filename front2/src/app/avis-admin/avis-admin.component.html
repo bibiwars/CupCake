@@ -1,0 +1,17 @@
+<h3>Les Avis</h3>
+
+<table class="table">
+  <tr>
+    <th>Note</th>
+    <th>Message</th>
+    <th>Utilisateur</th>
+  </tr>
+  <tbody *ngFor="let p of listAvis; let i= index">
+  <tr>
+    <td>{{p.note}}</td>
+    <td>{{p.message}}</td>
+    <td>{{p.iduser}}</td>
+    <td><button (click)="delete(p.id)"  class="btn btn-danger">Supprimer</button></td>
+  </tr>
+  </tbody>
+</table>

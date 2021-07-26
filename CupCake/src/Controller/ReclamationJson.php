@@ -43,7 +43,7 @@ class ReclamationJson extends AbstractController
     }
 
     /**
-     * @Route("/reclamation/add", name="recadd")
+     * @Route("/reclamationadd", name="recaddd")
      */
     public function adAction(Request $request,NormalizerInterface $Normalizer)
     {
@@ -73,7 +73,7 @@ class ReclamationJson extends AbstractController
     }
 
     /**
-     * @Route("/reclamation/delete/{id}", name="cvvd")
+     * @Route("/reclamationdelete/{id}", name="cvvd")
      */
     public function del(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -95,7 +95,7 @@ class ReclamationJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/rec/modify/{id_reclamation}", name="cvre")
+     * @Route("/recmodify/{id_reclamation}", name="cvre")
      */
     public function ModifyAction(Request $request,NormalizerInterface $Normalizer,$id_reclamation)
     {

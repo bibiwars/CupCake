@@ -3,6 +3,7 @@ import {Produit} from '../model/produit';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Competition} from '../model/competition';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,11 @@ import {Competition} from '../model/competition';
 export class CompetitionService {
 
   url = 'https://127.0.0.1:8001/competition';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private router :Router) { }
   postCompetition(competititon: Competition){
     return this.http.post(this.url + '/add'  , competititon).subscribe((res: any) => {
       console.log(res);
+      this.router.navigate(['admin/competitions']);
     });
   }
   getCompetitions(){
@@ -26,9 +28,11 @@ export class CompetitionService {
   updateCompetition(competition: Competition){
     return this.http.post(this.url + '/update'  , competition).subscribe((res: any) => {
       console.log(res);
+      this.router.navigate(['admin/competitions']);
     });
   }
   deleteCompetition(id){
     return this.http.get(this.url + '/delete/' + id);
+    
   }
 }

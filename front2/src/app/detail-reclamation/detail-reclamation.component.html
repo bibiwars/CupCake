@@ -1,0 +1,30 @@
+<div class="card" *ngIf="(reclamation | json) !== ({} | json)">
+  <h5 class="card-header">Type: {{reclamation.type}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">Message: {{reclamation.imessage}}</h5>
+    <p class="card-text">Reponse: {{reclamation.reponse}}.</p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Donner votre Avis</button>
+  </div>
+</div>
+<div *ngIf="(reclamation | json) === ({} | json)">Cette reclamation n'existe pas!</div>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <br><br>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Avis</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-ajout-avis [idreclamation]="reclamation.idReclamation"></app-ajout-avis>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>

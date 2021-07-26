@@ -39,10 +39,13 @@ security:
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/reset', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/resetpass', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/pat', roles: ROLE_ADMIN}
+        - { path: '^/pat/prod/', roles: ROLE_ADMIN}
+        - { path: '^/utilisateur/liste', roles: ROLE_ADMIN}
         - { path: '^/utilisateur/ajouter', roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: '^/utilisateur/supprimer', roles: IS_ADMIN}
-        - { path: '^/utilisateur/modifier', roles: IS_ADMIN}
-        - { path: '^/utilisateur/bloque', roles: IS_ADMIN}
-        - { path: '^/utilisateur/activer', roles: IS_ADMIN}
+        - { path: '^/utilisateur/supprimer', roles: ROLE_ADMIN}
+        - { path: '^/utilisateur/modifier', roles: ROLE_ADMIN}
+        - { path: '^/utilisateur/bloque', roles: ROLE_ADMIN}
+        - { path: '^/utilisateur/activer', roles: ROLE_ADMIN}
         - { path: '^/', roles: ROLE_USER}
     
