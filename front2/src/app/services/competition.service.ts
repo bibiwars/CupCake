@@ -9,7 +9,7 @@ import {Competition} from '../model/competition';
 })
 export class CompetitionService {
 
-  url = 'http://127.0.0.1:8001/competition';
+  url = 'https://127.0.0.1:8001/competition';
   constructor(private http: HttpClient) { }
   postCompetition(competititon: Competition){
     return this.http.post(this.url + '/add'  , competititon).subscribe((res: any) => {

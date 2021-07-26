@@ -9,11 +9,11 @@ export class AuthService {
   constructor(private Http:HttpClient) { }
   
   Login(d:any){
-    return this.Http.post('http://127.0.0.1:8001/login_check', d);
+    return this.Http.post('https://127.0.0.1:8001/login_check', d);
   }
 
   DeactivateUser(id: number){
-    return this.Http.get('http://127.0.0.1:8001/logout');
+    return this.Http.get('https://127.0.0.1:8001/logout');
   }
 
 }

@@ -42,7 +42,7 @@ class UtilisateurController extends AbstractController
             $data = $request->getContent();
             $u = $seralizer->deserialize($data, Utilisateur::class, 'json');
             // TODO check field values
-            $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password);
+            $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $u->getPassword());
             if(!$strongpass){
                 if (!$strongpass) $code = 1012; //weak password
                 return new Response(json_encode(array('resultat' => $code)));

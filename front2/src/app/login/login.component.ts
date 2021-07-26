@@ -15,10 +15,17 @@ export class LoginComponent implements OnInit {
   Login(d:any) {
     this.serviceAuth.Login(d).subscribe(
       (data) => {
-        alert(data);
-        // if invalid: return an error
-        // else: localStorage.setItem('jwt', JSON.stringify(response));
-      }
+        let str = JSON.stringify(data);
+        let jsonobj = JSON.parse(str);
+        if(jsonobj.token!=''){
+          localStorage.setItem('jwt', jsonobj.token);
+        }else{
+          alert('Erreur.');
+          console.log(jsonobj.resultat);
+        }
+      },(error) => {
+				alert('Invalide.');
+			}
     );
   }
 

@@ -9,15 +9,15 @@ export class NoteService {
   constructor(private Http:HttpClient) { }
 
   AddNote(d:any){
-    return this.Http.post('http://127.0.0.1:8001/note/ajouter', d);
+    return this.Http.post('https://127.0.0.1:8001/note/ajouter', d);
   }
 
   GetNotesPatisserie(id: number){
-    return this.Http.get('http://127.0.0.1:8001/note/patisserie/' + id);
+    return this.Http.get('https://127.0.0.1:8001/note/patisserie/' + id);
   }
 
   GetNotesProduit(id: number){
-    return this.Http.get('http://127.0.0.1:8001/note/produit/' + id);
+    return this.Http.get('https://127.0.0.1:8001/note/produit/' + id);
   }
 
 }

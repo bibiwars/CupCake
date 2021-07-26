@@ -15,10 +15,14 @@ export class UserRegisterComponent implements OnInit {
   Register(d:any) {
     this.serviceUser.Register(d).subscribe(
       (data) => {
-        alert(data);
-        // if invalid: return an error
-        // else: localStorage.setItem('jwt', JSON.stringify(response));
-      }
+        let str = JSON.stringify(data);
+        let jsonobj = JSON.parse(str);
+        if(jsonobj.resultat!=0){
+          alert("Erreur. Réessayer");
+        }
+      },(error) => {
+				alert('Erreur inconnue.');
+			}
     );
   }
 

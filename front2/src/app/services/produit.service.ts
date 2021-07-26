@@ -9,11 +9,11 @@ import {ActivatedRoute, Router} from '@angular/router';
   providedIn: 'root'
 })
 export class ProduitService {
-  url = 'http://127.0.0.1:8001/pat/prod';
+  url = 'https://127.0.0.1:8001/pat/prod';
   produit: Produit;
   constructor(private http: HttpClient, private router: Router) { }
   postProduit(produit: Produit){
-    return this.http.post('http://127.0.0.1:8001/produit/add'  , produit).subscribe((res: any) => {
+    return this.http.post('https://127.0.0.1:8001/produit/add'  , produit).subscribe((res: any) => {
       this.router.navigate(['pat/produits/' + produit.idpatisserie]);
       console.log(res);
     });
@@ -22,7 +22,7 @@ export class ProduitService {
     return this.http.get<Produit[]>(this.url + '/' + idPatisserie);
   }
   getProduit(id): Observable<Produit>{
-    return this.http.get<Produit>('http://127.0.0.1:8001/prod/' + id);
+    return this.http.get<Produit>('https://127.0.0.1:8001/prod/' + id);
   }
 
   updateProduit(produit: Produit){

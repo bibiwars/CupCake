@@ -14,6 +14,7 @@ import {UpdateProduitComponent} from './update-produit/update-produit.component'
 import {NotFoundComponent} from './not-found/not-found.component';
 
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -38,6 +39,7 @@ const ROUTES: Routes = [
   {path: 'competition/update/:id', component: UpdateCompetitionComponent},
   
   {  path: 'login',   component: LoginComponent,   data: { title: 'Login' } },
+  {  path: 'logout',   component: LogoutComponent,   data: { title: 'Logout' } },
   {  path: 'register',   component: UserRegisterComponent,   data: { title: 'Register' } },
   {  path: 'profile/:username',   component: UserProfileComponent,   data: { title: 'UserProfile' } },
   {  path: 'reset',   component: UserResetComponent,   data: { title: 'UserReset' } },

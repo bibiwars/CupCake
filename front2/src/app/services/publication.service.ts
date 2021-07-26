@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class PublicationService {
 
-  url = 'http://127.0.0.1:8001/publication';
+  url = 'https://127.0.0.1:8001/publication';
   constructor(private http: HttpClient, private router: Router) { }
   postPublication(publication: Publication){
     return this.http.post(this.url + '/add'  , publication).subscribe((res: any) => {

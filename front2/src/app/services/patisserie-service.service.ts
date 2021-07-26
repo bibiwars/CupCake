@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class PatisserieServiceService {
-  url = 'http://127.0.0.1:8001/pat';
+  url = 'https://127.0.0.1:8001/pat';
   patisserie: Patisserie;
   constructor(private http: HttpClient, private router: Router) { }
   postPatisserie(patisserie: Patisserie){
