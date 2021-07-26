@@ -1,0 +1,32 @@
+{% extends 'back.html.twig' %}
+{% block container %}
+    <h2>Mes reclamations</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Sujet</th>
+            <th scope="col">Description</th>
+            <th scope="col">Etat</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in reclamations %}
+            <tr>
+                <td>{{ r.sujet}}</td>
+                <td>{{ r.Description }}</td>
+                <td>{{ r.etat }}</td>
+                {% if r.etat == 'non traite' %}
+                <td><a href="{{ path('modifierReclamation',{'id':r.id}) }}">Modifier</a></td>
+                <td><a href="{{ path('supprimerReclamation',{'id':r.id}) }}">Supprimer</a></td>
+                {% else %}
+                    <td><a href="{{ path('voirReclamation',{'id':r.id}) }}">Voir</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('ajoutReclamation') }}">Envoyer une reclamation</a>
+
+{% endblock %}

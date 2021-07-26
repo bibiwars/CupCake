@@ -1,0 +1,26 @@
+<strong>Ajouter un produit</strong>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>Titre</label>
+    <input type="text" class="form-control" [(ngModel)]="publication.titre" name="titre" #d="ngModel" placeholder="Titre" required>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      le titre est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Photo</label>
+    <input type="file" class="form-control" [(ngModel)]="publication.media" name="photo" #d="ngModel" required>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      le titre est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Ajouter" name="ajouter" [disabled]="f.invalid" (click)="save()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+
+
+
+
+

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+
+    {{ form_start(form,{'attr':{'class':'sign-up-form sign-up'}}) }}
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Sujet</label>
+        {{ form_widget(form.sujet,{'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description</label>
+        {{ form_widget(form.Description,{'attr':{'class':'form-control'}}) }}
+    </div>
+    {{ form_widget(form.Envoyer,{'attr':{'class':'btn btn-info'}}) }}
+
+    {{ form_end(form) }}
+
+    <br>
+    <a href="{{ path('reclamation') }}">Voir mes Reclamations</a>
+{% endblock %}

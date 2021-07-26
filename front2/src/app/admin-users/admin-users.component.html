@@ -1,0 +1,44 @@
+
+    <section class="ct-u-paddingTop100 ct-u-paddingBottom70 ct-u-backgroundGray">
+        <div class="container">
+            <div class="text-center ct-u-paddingBottom60">
+                <h2 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
+                    Utilisateurs
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ct-u-paddingTop20">
+                    <table class="table">
+                        <thead class="table-striped">
+                            <tr>
+                                <td>Nom</td>
+                                <td>Prenom</td>
+                                <td>Adresse</td>
+                                <td>Téléphone</td>
+                                <td>Email</td>
+                                <td>Username</td>
+                                <td>Roles</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let u of users">
+                                <td>{{u.nom}}</td>
+                                <td>{{u.prenom}}</td>
+                                <td>{{u.adresse}}</td>
+                                <td>{{u.tel}}</td>
+                                <td>{{u.email}}</td>
+                                <td>{{u.username}}</td>
+                                <td>{{u.roles}}</td>
+                                <td><a href="/u/activate/{{u.id}}" class="btn btn-success text-uppercase">Activer</a></td>
+                                <td><a href="/admin/user/{{u.id}}" class="btn btn-info text-uppercase">Modifier Roles</a></td>
+                                <td><a href="/u/delete/{{u.id}}" class="btn btn-danger text-uppercase">Supprimer</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>

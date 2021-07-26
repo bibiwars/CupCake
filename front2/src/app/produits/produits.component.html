@@ -1,0 +1,24 @@
+<strong>Les produits de la patisserie {{nom}} </strong>
+<table class="table">
+  <tr>
+    <th>Designation</th>
+    <th>Description</th>
+    <th>Prix</th>
+    <th>Quantite</th>
+    <th>Note</th>
+    <th>Image</th>
+  </tr>
+  <tbody *ngFor="let p of listProd; let i= index">
+  <tr>
+    <td>{{p.designation}}</td>
+    <td>{{p.description}}</td>
+    <td>{{p.prix}}</td>
+    <td>{{p.qteStock}}</td>
+    <td>{{p.note}}</td>
+    <td>{{p.image}}</td>
+    <td><a routerLink="/produit/update/{{p.refPdt}}" class="btn btn-info">Modifier</a></td>
+    <td><button (click)="delete(p.refPdt)"  class="btn btn-danger">Supprimer</button></td>
+  </tr>
+  </tbody>
+</table>
+<a routerLink="../../{{idpatisserie}}/produit/add">Ajouter un produit</a>

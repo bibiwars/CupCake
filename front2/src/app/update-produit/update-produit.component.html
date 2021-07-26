@@ -1,0 +1,45 @@
+<strong>Modifier un produit</strong>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>designation</label>
+    <input type="text" class="form-control" [(ngModel)]="produit.designation" name="designation" #d="ngModel" placeholder="designation" required>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      la designation est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>description</label>
+    <textarea type="text" class="form-control" [(ngModel)]="produit.description" name="description" #de="ngModel"  placeholder="Description" required maxlength="300"></textarea>
+    <div class="alert alert-danger" *ngIf="de.invalid && de.touched">
+      <div *ngIf="de.errors.maxlength">Le nombre des caracteres ne doit pas depasser 300</div>
+      <div *ngIf="de.errors.required">La desctiption est obligatoire!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Prix</label>
+    <input type="text" class="form-control" [(ngModel)]="produit.prix" name="adresse" #p="ngModel"  placeholder="Prix" required maxlength="50">
+    <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+      L'adresse est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Qte de stock</label>
+    <input type="number" class="form-control" name="qte" [(ngModel)]="produit.qteStock" #q="ngModel"  placeholder="Qte"  min="0" max="99" required>
+    <div class="alert alert-danger" *ngIf="q.invalid && q.touched">
+      La qte est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Image</label>
+    <input type="file"  [(ngModel)]="produit.image" name="file" required>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Modifier" name="modifier" [disabled]="f.invalid" (click)="update()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+<a routerLink="/pat/produits/{{produit.idpatisserie}}">Voir les produits</a>
+
+
+
+

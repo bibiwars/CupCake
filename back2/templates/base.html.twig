@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>FaciliJob</title>
+
+    {% block css%}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/templete.css')}}">
+        <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('css/skin/skin-1.css')}}">
+        <link rel="stylesheet" href="{{ asset('plugins/datepicker/css/bootstrap-datetimepicker.min.css')}}"/>
+        <!-- Revolution Slider Css -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/revolution/revolution/css/layers.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/revolution/revolution/css/settings.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('plugins/revolution/revolution/css/navigation.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/material-kit.css')}}" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
+
+        <link rel="stylesheet" href="{{ asset('css/style2.css')}}">
+        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    <!-- ***** Preloader Start ***** -->
+    {% include "Vitrine/preloader.html.twig" %}
+    <!-- ***** Preloader End ***** -->
+
+
+    <!-- ***** Header Area Start ***** -->
+    {% include "Vitrine/navbar.html.twig" %}
+    <!-- ***** Header Area End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    {% include "Vitrine/banner.html.twig" %}
+    <!-- ***** Main Banner Area End ***** -->
+    {% block container %}{% endblock %}
+    <!-- Footer -->
+    {% include "Vitrine/footer.html.twig" %}
+    <!-- Footer END -->
+
+{% endblock %}
+<!-- jQuery -->
+{% block js %}
+    <script src="{{ asset('js/jquery-2.1.0.min.js')}}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{ asset('js/popper.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+
+    <!-- Plugins -->
+    <script src="{{ asset('js/scrollreveal.min.js')}}"></script>
+    <script src="{{ asset('js/waypoints.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.counterup.min.js')}}"></script>
+    <script src="{{ asset('js/imgfix.min.js')}}"></script>
+    <script src="{{ asset('js/mixitup.js')}}"></script>
+    <script src="{{ asset('js/accordions.js')}}"></script>
+
+    <!-- Global Init -->
+    <script src="{{ asset('js/custom.js')}}"></script>
+    <script src="{{ asset('js/jquery.min.js')}}"></script><!-- JQUERY.MIN JS -->
+    <script src="{{ asset('plugins/wow/wow.js')}}"></script><!-- WOW JS -->
+    <script src="{{ asset('plugins/bootstrap-select/bootstrap-select.min.js')}}"></script><!-- FORM JS -->
+    <script src="{{ asset('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js')}}"></script><!-- FORM JS -->
+    <script src="{{ asset('plugins/magnific-popup/magnific-popup.js')}}"></script><!-- MAGNIFIC POPUP JS -->
+    <script src="{{ asset('plugins/counter/waypoints-min.js')}}"></script><!-- WAYPOINTS JS -->
+    <script src="{{ asset('plugins/counter/counterup.min.js')}}"></script><!-- COUNTERUP JS -->
+    <script src="{{ asset('plugins/imagesloaded/imagesloaded.js')}}"></script><!-- IMAGESLOADED -->
+    <script src="{{ asset('plugins/masonry/masonry-3.1.4.js')}}"></script><!-- MASONRY -->
+    <script src="{{ asset('plugins/masonry/masonry.filter.js')}}"></script><!-- MASONRY -->
+    <script src="{{ asset('plugins/owl-carousel/owl.carousel.js')}}"></script><!-- OWL SLIDER -->
+    <script src="{{ asset('plugins/rangeslider/rangeslider.js')}}" ></script><!-- Rangeslider -->
+    <script src="{{ asset('js/custom.js')}}"></script><!-- CUSTOM FUCTIONS  -->
+    <script src="{{ asset('js/dz.carousel.js')}}"></script><!-- SORTCODE FUCTIONS  -->
+    <script src="{{ asset('js/recaptcha/api.js')}}"></script> <!-- Google API For Recaptcha  -->
+    <script src="{{ asset('js/dz.ajax.js')}}"></script><!-- CONTACT JS  -->
+    <script src="{{ asset('plugins/paroller/skrollr.min.js')}}"></script><!-- PAROLLER -->
+{% endblock %}
+</body>
+</html>

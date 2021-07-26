@@ -1,0 +1,29 @@
+<header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="" class="logo">Facili<em> Job</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="#top" class="active">Home</a></li>
+                            <li><a href="#categories">Categories</a></li>
+                            <li><a href="#offres">Offres</a></li>
+                            <li><a href="#avis">Avis</a></li> 
+                            {% if not app.user %}
+                                <li><a href="#login"><button name="submit" value="Submit" type="submit" class="site-button radius-xl login-btn">Login</button></a></li> 
+                            {% else %}
+                                <li><a href="{{path('security_logout')}}"><button name="submit" value="Submit" type="submit" class="site-button radius-xl login-btn">Logout</button></a></li> 
+                            {% endif %}
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>

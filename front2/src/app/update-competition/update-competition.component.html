@@ -1,0 +1,34 @@
+<strong><h3>Ajouter une competition</h3></strong>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>designation</label>
+    <input type="text" class="form-control" [(ngModel)]="competition.nomCompetition" name="nom" #d="ngModel" placeholder="Nom de la competition" required>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      le nom de la competition est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Prix</label>
+    <input type="date" class="form-control" [(ngModel)]="competition.dateDebut" name="datedebut" #p="ngModel"  required>
+    <div class="alert alert-danger" *ngIf="p.invalid && p.touched">
+      La date de debut est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Qte de stock</label>
+    <input type="date" class="form-control" name="qte" [(ngModel)]="competition.dateFin" #q="ngModel"   required>
+    <div class="alert alert-danger" *ngIf="q.invalid && q.touched">
+      La date de fin est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Ajouter" name="ajouter" [disabled]="f.invalid" (click)="update()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+<a routerLink="/competitions" >Voir les Competitions</a>
+
+
+
+
+

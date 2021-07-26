@@ -1,0 +1,51 @@
+<strong>Modifier ma patisserie</strong>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>Nom de votre patisserie</label>
+    <input type="text" class="form-control" [(ngModel)]="patisserie.nom" name="nom" #n="ngModel" placeholder="Nom" required>
+    <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+      Le nom est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Email de votre patisserie</label>
+    <input type="email" class="form-control" [(ngModel)]="patisserie.email" name="email"  placeholder="Email" #e="ngModel" required>
+    <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+      L'email est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Adresse de votre patisserie</label>
+    <input type="text" class="form-control" [(ngModel)]="patisserie.adresse" name="adresse" #a="ngModel"  placeholder="Adresse" required maxlength="50">
+    <div class="alert alert-danger" *ngIf="a.invalid && a.touched">
+      <div *ngIf="a.errors.maxlength">Le nombre des caracteres ne doit pas depasser 50</div>
+      <div *ngIf="a.errors.required">L'adresse est obligatoire!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Telephone de votre patisserie</label>
+    <input type="number" class="form-control" name="numero" [(ngModel)]="patisserie.tel" #t="ngModel"  placeholder="Telephone"  min="11111111" max="99999999" required>
+    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+      <div *ngIf="t.errors.min">Le numero doit etre composé par 8 chiffres</div>
+      <div *ngIf="t.errors.required">Le numero est obligatoire!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Theme de votre patisserie</label>
+    <textarea type="text" class="form-control" [(ngModel)]="patisserie.theme" name="adresse" #th="ngModel"  placeholder="Theme" required maxlength="300"></textarea>
+    <div class="alert alert-danger" *ngIf="th.invalid && th.touched">
+      <div *ngIf="th.errors.maxlength">Le nombre des caracteres ne doit pas depasser 300</div>
+      <div *ngIf="th.errors.required">Le theme est obligatoire!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Modifier" name="modifier" [disabled]="f.invalid" (click)="update()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+<a routerLink="/pat" >Voir mes patisseries</a>
+
+
+
+
+

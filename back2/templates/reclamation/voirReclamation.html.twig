@@ -1,0 +1,13 @@
+{% extends 'back.html.twig' %}
+{% block container %}
+    {% for r in reclamations %}
+        <label>Sujet</label>
+            <p>{{ r.sujet}}</p>
+        <label>votre Description</label>
+            <p>{{ r.Description }}</p>
+        <label>La reponse</label>
+            <p>{{ r.Reponse }}</p>
+    {% endfor %}
+    <br>
+    <a href="{{ path('reclamation') }}">Voir mes Reclamations</a>
+{% endblock %}
