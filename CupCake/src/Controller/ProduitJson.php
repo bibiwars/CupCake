@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+use App\Entity\Patisserie;
 use App\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,16 +18,20 @@ class ProduitJson extends AbstractController
     /**
      * @Route("/pat/prod/{idpatisserie}", name="prod")
      */
-    public function AfiAction($idpatisserie)
+    public function AfiAction($idpatisserie,NormalizerInterface $Normalizer)
     {
-        $tasks = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findBy(array('idpatisserie'=>$idpatisserie));
+        $patisserie=$this->getDoctrine()->getManager()->getRepository(Patisserie::class)->findBy(array('id'=>$idpatisserie));
+        $produits = $this->getDoctrine()->getManager()->getRepository(Produit::class)->findBy(array('patisserie'=>$patisserie));
 
-        $serializer = new Serializer([new ObjectNormalizer()]);
-        $formatted = $serializer->normalize($tasks);
-        return new JsonResponse($formatted);
+        /*$serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);*/
+
+        $jsonContent = $Normalizer->normalize($produits,'json',['groups'=>'post:read']);
+        return new JsonResponse($jsonContent);
     }
+
     /**
-     * @Route("/pat/prod/add", name="prodadhfhfd")
+     * @Route("/produit/add", name="prodadhfhseifd")
      */
     public function addAction(Request $request,NormalizerInterface $Normalizer)
     {
@@ -45,10 +50,12 @@ class ProduitJson extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $rec = new Produit();
         $rec->setDescription($request->get('description'));
-        $rec->setIdpatisserie($request->get('idpatisserie'));
+        $patisserie=$this->getDoctrine()->getManager()->getRepository(Patisserie::class)->findOneBy(array('id'=>$request->get('idpatisserie')));
+        $rec->setPatisserie($patisserie);
+
         $rec->setDesignation($request->get('designation'));
         $rec->setImage($request->get('image'));
-        $rec->setNote($request->get('note'));
+        $rec->setNote(0);
         $rec->setPrix($request->get('prix'));
         $rec->setQteStock($request->get('qteStock'));
         $em->persist($rec);
@@ -56,6 +63,7 @@ class ProduitJson extends AbstractController
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));
     }
+
     /**
      * @Route("/pat/prod/del/{id}", name="prodd")
      */
@@ -79,14 +87,30 @@ class ProduitJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/prod/modify/{id}", name="prodm")
+     * @Route("/pat/prod/update/{id}", name="prodmrt",methods={"GET","POST"})
      */
     public function ModifyAction(Request $request,NormalizerInterface $Normalizer,$id)
     {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
         $em = $this->getDoctrine()->getManager();
         $rec = $em->getRepository(Produit::class)->find($id);
-        $rec->setIdcompetition(5);
-        $rec->setType($request->get('type'));
+        $rec->setDescription($request->get('description'));
+        $rec->setIdpatisserie($request->get('idpatisserie'));
+        $rec->setDesignation($request->get('designation'));
+        $rec->setImage($request->get('image'));
+        $rec->setPrix($request->get('prix'));
+        $rec->setQteStock($request->get('qteStock'));
         $em->flush();
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));

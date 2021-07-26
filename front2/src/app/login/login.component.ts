@@ -11,7 +11,9 @@ export class LoginComponent implements OnInit {
   //@Input() creds: TeamComponent;
   constructor(private serviceAuth: AuthService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    let loggedin = 1;
+  }
   Login(d:any) {
     this.serviceAuth.Login(d).subscribe(
       (data) => {

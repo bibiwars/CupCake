@@ -64,13 +64,6 @@ class Produit
      */
     private $qteStock;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idpatisserie", type="integer", nullable=false)
-     * @Groups("post:read")
-     */
-    private $idpatisserie;
 
     /**
      * @var int
@@ -79,6 +72,11 @@ class Produit
      * @Groups("post:read")
      */
     private $note;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Patisserie::class, inversedBy="produits", cascade={"persist"})
+     */
+    private $patisserie;
 
     /**
      * @return int
@@ -176,21 +174,6 @@ class Produit
         $this->qteStock = $qteStock;
     }
 
-    /**
-     * @return int
-     */
-    public function getIdpatisserie(): int
-    {
-        return $this->idpatisserie;
-    }
-
-    /**
-     * @param int $idpatisserie
-     */
-    public function setIdpatisserie(int $idpatisserie): void
-    {
-        $this->idpatisserie = $idpatisserie;
-    }
 
     /**
      * @return int
@@ -206,6 +189,18 @@ class Produit
     public function setNote(int $note): void
     {
         $this->note = $note;
+    }
+
+    public function getPatisserie(): ?Patisserie
+    {
+        return $this->patisserie;
+    }
+
+    public function setPatisserie(?Patisserie $patisserie): self
+    {
+        $this->patisserie = $patisserie;
+
+        return $this;
     }
 
 

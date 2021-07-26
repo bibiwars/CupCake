@@ -19,7 +19,7 @@ class ReclamationJson extends AbstractController
 
 
     /**
-     * @Route("/rec", name="rec")
+     * @Route("/reclamation", name="rec")
      */
     public function AffAction()
     {
@@ -29,19 +29,43 @@ class ReclamationJson extends AbstractController
         $formatted = $serializer->normalize($tasks);
         return new JsonResponse($formatted);
     }
+
     /**
-     * @Route("/rec/add", name="recadd")
+     * @Route("/reclamation/{id}", name="resfsfsc")
+     */
+    public function AfffAction($id)
+    {
+        $tasks = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findOneBy(array('idReclamation' => $id));
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/reclamation/add", name="recadd")
      */
     public function adAction(Request $request,NormalizerInterface $Normalizer)
     {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
         $em = $this->getDoctrine()->getManager();
         $rec = new Reclamation();
+        $rec->setType($request->get('type'));
         $rec->setImessage($request->get('imessage'));
         $rec->setIdutilisateur(4);
-        $rec->setIdpatisserie(5);
-        $rec->setVisible($request->get('visible'));
-        $rec->setStatus($request->get('status'));
-        $rec->setReponse($request->get('reponse'));
+        $rec->setStatus('non traite');
+        $rec->setReponse('');
         $em->persist($rec);
         $em->flush();
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
@@ -49,7 +73,7 @@ class ReclamationJson extends AbstractController
     }
 
     /**
-     * @Route("/rec/del/{id}", name="cvvd")
+     * @Route("/reclamation/delete/{id}", name="cvvd")
      */
     public function del(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -58,7 +82,7 @@ class ReclamationJson extends AbstractController
         $em->remove($comp);
         $em->flush();
         $jsonContent = $Normalizer->normalize($comp,'json',['groups'=>'post:read']);
-        return new Response("Deleted Succesfully".json_encode($jsonContent));
+        return new Response(json_encode($jsonContent));
     }
     /**
      * @Route("/rec/{id}", name="qf")
@@ -86,6 +110,61 @@ class ReclamationJson extends AbstractController
         $em->flush();
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/reclamation/user/{iduser}", name="redsc")
+     */
+    public function recUserAction($iduser)
+    {
+        $tasks = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findBy(array('idutilisateur'=>$iduser));
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        return new JsonResponse($formatted);
+    }
+
+
+    /**
+     * @Route("/reclamations/repondre/{id}", name="repondreee",methods={"GET","POST"})
+     */
+    public function repondreeAction(Request $request,NormalizerInterface $Normalizer,$id)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
+        $em = $this->getDoctrine()->getManager();
+        $rec = $em->getRepository(Reclamation::class)->find($id);
+        $rec->setStatus('traite');
+        $rec->setReponse($request->get('reponse'));
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/reclamationCalcul/{type}", name="sfsff")
+     */
+    public function fqqffAction($type)
+    {
+        $tasks = $this->getDoctrine()->getManager()->getRepository(Reclamation::class)->findBy(array('type'=>$type));
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($tasks);
+        $total=0;
+        foreach ($tasks as $row){
+            $total ++;
+        }
+        return new JsonResponse($total);
     }
 
 }

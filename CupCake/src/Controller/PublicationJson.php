@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PublicationJson extends AbstractController
 {
     /**
-     * @Route("/pub", name="pub")
+     * @Route("/publication", name="pub")
      */
     public function AfiAction()
     {
@@ -27,19 +27,34 @@ class PublicationJson extends AbstractController
         return new JsonResponse($formatted);
     }
     /**
-     * @Route("/pub/add", name="pubadd")
+     * @Route("/publication/add", name="pubaddd")
      */
     public function adAction(Request $request,NormalizerInterface $Normalizer)
     {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
         $em = $this->getDoctrine()->getManager();
         $rec = new Publication();
-        $rec->setIdutilisateur(5);
-        $rec->setIdcompetition(3);
+        $rec->setIdcompetition($request->get('idcompetition'));
         $rec->setMedia($request->get('media'));
         $rec->setTexte($request->get('texte'));
         $rec->setTitre($request->get('titre'));
         $em->persist($rec);
         $em->flush();
+
+        $this->addFlash("success", "Inscription réussie !");
+
+
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));
     }

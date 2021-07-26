@@ -40,5 +40,9 @@ security:
         - { path: '^/utilisateur/reset', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/resetpass', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/ajouter', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/utilisateur/supprimer', roles: IS_ADMIN}
+        - { path: '^/utilisateur/modifier', roles: IS_ADMIN}
+        - { path: '^/utilisateur/bloque', roles: IS_ADMIN}
+        - { path: '^/utilisateur/activer', roles: IS_ADMIN}
         - { path: '^/', roles: ROLE_USER}
     
