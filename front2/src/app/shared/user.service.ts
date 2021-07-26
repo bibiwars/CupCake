@@ -12,6 +12,10 @@ export class UserService {
     return this.Http.post('https://127.0.0.1:8001/utilisateur/ajouter', d);
   }
 
+  GetLoggedinUser(){
+    return this.Http.get('https://127.0.0.1:8001/utilisateur/authenticated');
+  }
+
   GetUsers(){
     return this.Http.get('https://127.0.0.1:8001/utilisateur/liste');
   }
@@ -49,7 +53,7 @@ export class UserService {
   }
 
   ImgUploadUser(d: any){
-    return this.Http.post('https://127.0.0.1:8001/utilisateur/resetpass/', d);
+    return this.Http.post('https://127.0.0.1:8001/utilisateur/', d);
   }
 
 }

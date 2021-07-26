@@ -8,29 +8,34 @@ import { UserService } from '../shared/user.service';
 })
 export class UserResetComponent implements OnInit {
   email = "";
+  divStyle1 = "block";
+  divStyle2 = "none";
   constructor(private serviceUser: UserService) { }
 
   ngOnInit(): void {
   }
 
-  Reset(email:string) {
-    this.email = email;
-    this.serviceUser.OTPUser(email).subscribe(
+  Reset(d) {
+    this.email = d.email;
+    this.serviceUser.OTPUser(this.email).subscribe(
       (data) => {
-        alert(data);
-        // if invalid: return an error
-        // else: localStorage.setItem('jwt', JSON.stringify(response));
-      }
+        this.divStyle1 = "none";
+        this.divStyle2 = "block";
+      },(error) => {
+				alert('Erreur.');
+			}
     );
   }
 
   Resetpass(d:any) {
+    console.log(d);
     this.serviceUser.ResetUser(d, this.email).subscribe(
       (data) => {
-        alert(data);
-        // if invalid: return an error
-        // else: localStorage.setItem('jwt', JSON.stringify(response));
-      }
+        console.log(data)
+        window.location.href = '/login';
+      },(error) => {
+				alert('Erreur.');
+			}
     );
   }
 

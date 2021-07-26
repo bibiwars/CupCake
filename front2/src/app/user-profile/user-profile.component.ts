@@ -7,16 +7,26 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  id=1; //id = this user
+  id=0;
   user: any;
   constructor(private serviceUser: UserService) { }
 
   ngOnInit(): void {
-    this.serviceUser.GetUserById(this.id).subscribe(
+    this.serviceUser.GetLoggedinUser().subscribe(
 			(data) => {
-				this.user = data;
+        let str = JSON.stringify(data);
+        let jsonobj = JSON.parse(str);
+				this.id = jsonobj.id;
+        console.log(this.id);
+          this.serviceUser.GetUserById(this.id).subscribe(
+            (data) => {
+              this.user = data;
+              console.log(data)
+            }
+          );
 			}
 		);
+    
   }
 
 }

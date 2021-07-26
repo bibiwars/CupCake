@@ -14,21 +14,12 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-12">
-                                            <span class="checkbox">
-                                                <input type="checkbox" id="role1" name="role1" value="CLIENT"
-                                                    class="form-control">
-                                                <label for="role1">Client</label>
-                                            </span>
-                                            <span class="checkbox">
-                                                <input type="checkbox" id="role2" name="role2" value="PATISSIER"
-                                                    class="form-control">
-                                                <label for="role2">Patissier</label>
-                                            </span>
-                                            <span class="checkbox">
-                                                <input type="checkbox" id="role3" name="role3" value="CLIENT"
-                                                    class="form-control">
-                                                <label for="role3">Admin</label>
-                                            </span>
+                                            <select id="type" placeholder="Type" required name="type"
+                                                       class="form-control" ngModel #id="ngModel">
+                                                    <option>Client</option>
+                                                    <option>Patissier</option>
+                                                    <option>Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

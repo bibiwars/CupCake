@@ -67,7 +67,7 @@ class UtilisateurController extends AbstractController
      */
     public function modifierutilisateur(int $id, Request $request, SerializerInterface $seralizer): Response
     {
-        try{
+        //try{
             $data = $request->getContent();
             $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneById($id);
             $u_back = $u;
@@ -77,9 +77,9 @@ class UtilisateurController extends AbstractController
             $m = $this->getDoctrine()->getManager();
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
-        }catch(\Throwable $throwable){
+        /*}catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }
+        }*/
     }
 
     /**
@@ -93,7 +93,15 @@ class UtilisateurController extends AbstractController
             foreach ($users as $user) {
                 $jsonContent[] = array(
                     'id' => $user->getId(),
-                    'username' => $user->getUsername(),
+                    'nom' => $user->getNom(),
+                    'prenom' => $user->getPrenom(),
+                    'adresse' => $user->getAdresse(),
+                    'tel' => $user->getTel(),
+                    'email' => $user->getEmail(),
+                    'username' => $user->getUsern(),
+                    'roles' => $user->getRoles(),
+                    'activer' => $user->getActiver(),
+                    'image' => $user->getImage(),
                 );
             }
             // Alternative
@@ -281,7 +289,7 @@ class UtilisateurController extends AbstractController
      */
     public function resetPassword(string $user, Request $request, UserPasswordEncoderInterface $encoder): Response
     {
-        try{
+        //try{
             if(strpos($user, '@') !== false){
                 $u = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneByEmail($user);
             }else{
@@ -294,10 +302,10 @@ class UtilisateurController extends AbstractController
             $passwordre = isset($data['passwordre']) ? $data['passwordre'] : null;
             
             $strongpass = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password);
-            if($password==null || $password!==$passwordre || $otp!==$u->getToken() || !$strongpass){
+            if($password==null || $password!==$passwordre || $otp!=$u->getToken() || !$strongpass){
                 if ($password==null) $code = 1001; //password value empty
                 if ($password!==$passwordre) $code = 1002; //password verification does not match
-                if ($otp!==$u->getToken()) $code = 1003; //otp invalid
+                if ($otp!==$u->getToken()) $code = 1010; //otp invalid
                 if (!$strongpass) $code = 1012; //weak password
                 return new Response(json_encode(array('resultat' => $code)));
             }
@@ -306,9 +314,9 @@ class UtilisateurController extends AbstractController
             $m = $this->getDoctrine()->getManager();
             $m->flush();
             return new Response(json_encode(array('resultat' => '0')));
-        }catch(\Throwable $throwable){
+        /*}catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
-        }
+        }*/
     }
 
 
@@ -392,6 +400,19 @@ class UtilisateurController extends AbstractController
     {
         try{
             // TODO returns a zip link that expires in 24 hours, containning all user details (excel) and images
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }  
+    }
+
+    /**
+     * @Route("/utilisateur/authenticated", name="authenticated_utilisateur")
+     */
+    public function authenticatedutilisateur(Security $security): Response
+    {
+        try{
+            $u = $security->getUser();
+            return new Response(json_encode(array('id' => $u->getId())));
         }catch(\Throwable $throwable){
             return new Response(json_encode(array('resultat' => '1')));
         }  

@@ -20,6 +20,7 @@ export class UserRegisterComponent implements OnInit {
         if(jsonobj.resultat!=0){
           alert("Erreur. Réessayer");
         }
+        window.location.href = '/login';
       },(error) => {
 				alert('Erreur inconnue.');
 			}

@@ -106,6 +106,11 @@ class Utilisateur implements UserInterface
         return (string) $this->email;
     }
 
+    public function getUsern(): string
+    {
+        return (string) $this->username;
+    }
+
     /**
      * @see UserInterface
      */

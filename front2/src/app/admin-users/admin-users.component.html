@@ -32,7 +32,8 @@
                                 <td>{{u.email}}</td>
                                 <td>{{u.username}}</td>
                                 <td>{{u.roles}}</td>
-                                <td><a href="/u/activate/{{u.id}}" class="btn btn-success text-uppercase">Activer</a></td>
+                                <td *ngIf="u.activer == 0"><a href="/u/activate/{{u.id}}" class="btn btn-success text-uppercase">Activer</a></td>
+                                <td *ngIf="u.activer == 1"><a href="/u/deactivate/{{u.id}}" class="btn btn-success text-uppercase">Desactiver</a></td>
                                 <td><a href="/admin/user/{{u.id}}" class="btn btn-info text-uppercase">Modifier Roles</a></td>
                                 <td><a href="/u/delete/{{u.id}}" class="btn btn-danger text-uppercase">Supprimer</a></td>
                             </tr>

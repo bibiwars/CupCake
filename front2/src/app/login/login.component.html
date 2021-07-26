@@ -25,7 +25,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="email" placeholder="Email" required type="email" name="email"
-                                                       class="form-control" autofocus="" ngModel #id="ngModel">
+                                                       class="form-control" autofocus="" ngModel #email="ngModel">
+                                                <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+                                                    <div *ngIf="email.errors.required">L'email est obligatoire!</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -35,8 +38,11 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <input id="password" placeholder="Mot de passe" required type="password" name="password"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #password="ngModel">
                                                        <a style="margin-left: 5px" href="/reset">Mot de passe oublié?</a>
+                                                <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                                                    <div *ngIf="password.errors.required">Le mot de passe est obligatoire!</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

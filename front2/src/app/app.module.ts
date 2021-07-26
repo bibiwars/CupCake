@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { JwtInterceptorService } from './shared/jwt-interceptor.service';
 import { AjoutPatisserieComponent } from './ajout-patisserie/ajout-patisserie.component';
 import { PatisseriesComponent } from './patisseries/patisseries.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -62,7 +63,7 @@ import { UserDeactivateComponent } from './user-deactivate/user-deactivate.compo
         FormsModule,
         HttpClientModule,
     ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

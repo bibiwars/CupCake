@@ -29,8 +29,11 @@
 <div class="ct-shopMenuMobile">
     <nav class="ct-shopMenuMobile-navbar">
         <ul class="list-unstyled">
-            <li><a href="/login">S'authentifier</a></li>
-            <li><a href="/register">S'inscrire</a></li>
+            <li *ngIf="loggedin == 0"><a href="/login">S'authentifier</a></li>
+            <li *ngIf="loggedin == 0"><a href="/register">S'inscrire</a></li>
+            <li *ngIf="loggedin == 1"><a href="/profile">Profile</a></li>
+            <li *ngIf="loggedin == 1"><a href="/settings">Compte</a></li>
+            <li *ngIf="loggedin == 1"><a href="/logout">Déconnecter</a></li>
         </ul>
     </nav>
 </div>
@@ -56,8 +59,11 @@
                <div class="col-sm-6">
                    <nav class="ct-topBar-navigation pull-left">
                        <ul class="list-unstyled list-inline">
-                           <li><a href="/login">S'authentifier</a></li>
-                           <li><a href="/register">S'inscrire</a></li>
+                           <li *ngIf="loggedin == 0"><a href="/login">S'authentifier</a></li>
+                           <li *ngIf="loggedin == 0"><a href="/register">S'inscrire</a></li>
+                           <li *ngIf="loggedin == 1"><a href="/profile">Profile</a></li>
+                           <li *ngIf="loggedin == 1"><a href="/settings">Compte</a></li>
+                           <li *ngIf="loggedin == 1"><a href="/logout">Déconnecter</a></li>
                        </ul>
                    </nav>
                </div>

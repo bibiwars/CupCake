@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
         let jsonobj = JSON.parse(str);
         if(jsonobj.token!=''){
           localStorage.setItem('jwt', jsonobj.token);
+          window.location.href = '/';
         }else{
           alert('Erreur.');
-          console.log(jsonobj.resultat);
         }
       },(error) => {
 				alert('Invalide.');

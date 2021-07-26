@@ -20,9 +20,16 @@ export class AdminUserComponent implements OnInit {
   }
 
   updateUser(d: any) {
-		this.serviceUser.UpdateUser(this.activatedroute.snapshot.params.id, d).subscribe(
+	  	let role = "";
+		if(d.type=="Admin")
+		  role = "IS_ADMIN";
+		if(d.type=="Client")
+		  role = "IS_CLIENT";
+		if(d.type=="Patissier")
+		  	role = "IS_PATISSIER";
+		this.serviceUser.UpdateUser(this.activatedroute.snapshot.params.id, { "roles": [role] }).subscribe(
 			() => {
-				alert('User roles modified');
+				//alert('User roles modified');
 			}
 		);
 	}

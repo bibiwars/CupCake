@@ -25,7 +25,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="nom" placeholder="Nom" required type="text" name="nom"
-                                                       class="form-control" autofocus="" ngModel #id="ngModel">
+                                                       class="form-control" autofocus="" ngModel #nom="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="nom.invalid && nom.touched">
+                                                        Le nom est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -36,7 +39,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="prenom" placeholder="Prenom" required type="text" name="prenom"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #prenom="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="prenom.invalid && prenom.touched">
+                                                        Le prénom est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -47,7 +53,11 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="adresse" placeholder="Adreese" required type="text" name="adresse"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #a="ngModel">
+                                                <div class="alert alert-danger" *ngIf="a.invalid && a.touched">
+                                                    <div *ngIf="a.errors.maxlength">Le nombre des caracteres ne doit pas depasser 50</div>
+                                                    <div *ngIf="a.errors.required">L'adresse est obligatoire!</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +68,11 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="tel" placeholder="Numéro téléphone" required type="text" name="tel"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #t="ngModel">
+                                                    <div class="alert alert-danger" *ngIf="t.invalid && t.touched">
+                                                        <div *ngIf="t.errors.min">Le numero doit etre composé par 8 chiffres</div>
+                                                        <div *ngIf="t.errors.required">Le numero est obligatoire!</div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +83,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="email" placeholder="Email" required type="email" name="email"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #e="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+                                                        L'email est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +97,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group ">
                                                 <input id="username" placeholder="Nom d'utilisateur" required type="text" name="username"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #username="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="username.invalid && username.touched">
+                                                        Le nom d'utilisateur est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +111,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <input id="password" placeholder="Mot de passe" required type="password" name="password"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #password="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                                                        Le Mot de passe est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +125,10 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <input id="passwordre" placeholder="Vérification Mot de passe" required type="password" name="passwordre"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #passwordre="ngModel">
+                                                       <div class="alert alert-danger" *ngIf="passwordre.invalid && passwordre.touched">
+                                                        Le Mot de passe est obligatoire!
+                                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -114,10 +140,13 @@
                                         <div class="col-sm-6 col-md-12">
                                             <div class="form-group">
                                                 <select id="type" placeholder="Type d'utilisateur" required name="type"
-                                                       class="form-control" ngModel #id="ngModel">
+                                                       class="form-control" ngModel #type="ngModel">
                                                     <option>Client</option>
                                                     <option>Patissier</option>
                                                 </select>
+                                                <div class="alert alert-danger" *ngIf="type.invalid && type.touched">
+                                                        Le type est obligatoire!
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

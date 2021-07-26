@@ -41,14 +41,14 @@ const ROUTES: Routes = [
   {  path: 'login',   component: LoginComponent,   data: { title: 'Login' } },
   {  path: 'logout',   component: LogoutComponent,   data: { title: 'Logout' } },
   {  path: 'register',   component: UserRegisterComponent,   data: { title: 'Register' } },
-  {  path: 'profile/:username',   component: UserProfileComponent,   data: { title: 'UserProfile' } },
+  {  path: 'profile',   component: UserProfileComponent,   data: { title: 'UserProfile' } },
   {  path: 'reset',   component: UserResetComponent,   data: { title: 'UserReset' } },
   {  path: 'settings',   component: UserSettingsComponent,   data: { title: 'UserSettings' } },
   {  path: 'admin/user/:id',   component: AdminUserComponent,   data: { title: 'AdminUser' } },
   {  path: 'admin/users',   component: AdminUsersComponent,   data: { title: 'AdminUsers' } },
-  {  path: 'u/activate',   component: UserActivateComponent,   data: { title: 'UserActivate' } },
-  {  path: 'u/deactivate',   component: UserDeactivateComponent,   data: { title: 'UserDeactivate' } },
-  {  path: 'u/delete',   component: UserDeleteComponent,   data: { title: 'UserDelete' } },
+  {  path: 'u/activate/:id',   component: UserActivateComponent,   data: { title: 'UserActivate' } },
+  {  path: 'u/deactivate/:id',   component: UserDeactivateComponent,   data: { title: 'UserDeactivate' } },
+  {  path: 'u/delete/:id',   component: UserDeleteComponent,   data: { title: 'UserDelete' } },
   
   {path: '**', component: NotFoundComponent},
   

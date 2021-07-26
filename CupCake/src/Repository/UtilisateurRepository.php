@@ -70,7 +70,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT u.id, u.nom, u.prenom, u.email, u.adresse, u.tel, u.username 
+            'SELECT u.id, u.nom, u.prenom, u.email, u.adresse, u.tel, u.username, u.activer, u.roles, u.image 
             FROM App\Entity\Utilisateur u
             WHERE u.id = :id'
         )->setParameter('id', $id);
