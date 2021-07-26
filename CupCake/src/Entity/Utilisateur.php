@@ -79,6 +79,21 @@ class Utilisateur implements UserInterface
      */
     private $token;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bio;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bio2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $bio3;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -264,6 +279,42 @@ class Utilisateur implements UserInterface
     public function setToken(string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getBio2(): ?string
+    {
+        return $this->bio2;
+    }
+
+    public function setBio2(?string $bio2): self
+    {
+        $this->bio2 = $bio2;
+
+        return $this;
+    }
+
+    public function getBio3(): ?string
+    {
+        return $this->bio3;
+    }
+
+    public function setBio3(?string $bio3): self
+    {
+        $this->bio3 = $bio3;
 
         return $this;
     }
