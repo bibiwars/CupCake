@@ -1,0 +1,50 @@
+<section class="widget" widget>
+    <header>
+        <h1 class="page-title"><span class="fw-semi-bold"> Listes des condidaturess</span></h1>
+    </header>
+    <notifier-container></notifier-container>
+    <div class="widget-body">
+        <div class="mt">
+            <div class="float-right mb">
+                <div class="input-group input-group-rounded">
+                    <span class="input-group-addon">
+
+                    </span>
+                    <input class="form-control input-transparant search-input" (keyup)='updateFilterCondidatures()'
+                        type="text" placeholder="Rechercher Condidature" [(ngModel)]="filterCondidatures">
+                </div>
+            </div>
+            <div>
+                <br>
+                <ngx-datatable class="table table-striped table-hover" [rows]="condidatures" [columnMode]="'force'"
+                    [reorderable]="false" [swapColumns]="false" [headerHeight]="50" [footerHeight]="50"
+                    [rowHeight]="'auto'" [limit]="8">
+                    <ngx-datatable-column name="applicateur" prop="applicateur">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="patisserie" prop="patisserie">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="message" prop="message">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="état" prop="etat">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="CV">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-row="row"
+                            let-rowIndex="rowIndex">
+                            <span><a href="https://127.0.0.1:8001/assets/{{value}}"><i class="fa fa-file fa-2x" style="cursor: pointer
+                            "></i></a></span>&nbsp;&nbsp;
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="opération">
+                        <ng-template ngx-datatable-cell-template let-value="value" let-row="row"
+                            let-rowIndex="rowIndex">
+                            <span><i (click)="accept(row);" class="fa fa-check fa-2x" style="color:green;     cursor: pointer
+                            "></i></span>&nbsp;&nbsp;
+                            <span><i (click)="delete(row)" class="glyphicon glyphicon-remove fa-2x" style="color:#db4912;     cursor: pointer
+                            "></i></span>&nbsp;&nbsp;
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</section>

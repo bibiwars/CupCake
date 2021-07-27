@@ -47,5 +47,7 @@ security:
         - { path: '^/utilisateur/modifier', roles: ROLE_ADMIN}
         - { path: '^/utilisateur/bloque', roles: ROLE_ADMIN}
         - { path: '^/utilisateur/activer', roles: ROLE_ADMIN}
+        #- { path: '^/list-condidatures', roles: ROLE_ADMIN}
+        #- { path: '^/list-commandes', roles: ROLE_ADMIN}
         - { path: '^/', roles: ROLE_USER}
     

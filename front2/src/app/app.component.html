@@ -2,8 +2,15 @@
 
 <nav class="ct-menuMobile">
     <ul class="ct-menuMobile-navbar">
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/contact">Contact</a></li>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/pat">Patisserie</a></li>
+              <li><a href="/admin/competition/add">Competition</a></li>
+              <li><a href="/mesreclamations">Reclamations</a></li>
+                    <li><a href="/admin/avis">Avis</a></li>
+                <li *ngIf="" ><a href="admin/users">Utilisateurs</a></li>
+                <li *ngIf=""><a href="/list-commandes">Commandes</a></li>
+                <li *ngIf=""><a href="/list-condidatures">Candidatures</a></li>
+                <li><a href="/panier">Panier</a></li>
     </ul>
 </nav>
 
@@ -55,23 +62,15 @@
         <div class="container">
             <ul class="nav navbar-nav yamm">
                 <li><a href="/">Accueil</a></li>
-            </ul>
-            <ul class="nav navbar-nav yamm">
                 <li><a href="/pat">Patisserie</a></li>
-            </ul>
-
-          <ul class="nav navbar-nav yamm">
               <li><a href="/admin/competition/add">Competition</a></li>
-          </ul>
-          <ul class="nav navbar-nav yamm">
               <li><a href="/mesreclamations">Reclamations</a></li>
-          </ul>
-          <ul class="nav navbar-nav yamm">
-            <li><a href="/admin/avis">Avis</a></li>
-        </ul>
-        <ul class="nav navbar-nav yamm">
-          <li><a href="admin/users">Utilisateurs</a></li>
-      </ul>
+                    <li><a href="/admin/avis">Avis</a></li>
+                <li *ngIf="" ><a href="admin/users">Utilisateurs</a></li>
+                <li *ngIf=""><a href="/list-commandes">Commandes</a></li>
+                <li *ngIf=""><a href="/list-condidatures">Candidatures</a></li>
+                <li><a href="/panier">Panier</a></li>
+            </ul>
       </div>
     <!-- /.container -->
     </nav>

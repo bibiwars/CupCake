@@ -46,6 +46,16 @@ import { PublicationAdminComponent } from './publication-admin/publication-admin
 import { UpdatePublicationComponent } from './update-publication/update-publication.component';
 import { UpdateReclamationComponent } from './update-reclamation/update-reclamation.component';
 
+import { CondidatureComponent } from './condidature/condidature.component';
+import { AngularFileUploaderModule } from "angular-file-uploader";
+import { ShowCondidaturesComponent } from './show-condidatures/show-condidatures.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { CommonModule } from '@angular/common';
+import { NotifierModule } from 'angular-notifier';
+import { CommandesComponent } from './commande/commandes.component';
+import { ShowCommandesComponent } from './show-commandes/show-commandes.component';
+import { PaymentComponent } from './payment/payment.component';
+
 
 @NgModule({
   declarations: [
@@ -84,14 +94,23 @@ import { UpdateReclamationComponent } from './update-reclamation/update-reclamat
     AjoutAvisComponent,
     PublicationAdminComponent,
     UpdatePublicationComponent,
-    UpdateReclamationComponent
+    UpdateReclamationComponent,
+    CondidatureComponent,
+    ShowCondidaturesComponent,
+    CommandesComponent,
+    ShowCommandesComponent,
+    PaymentComponent
   ],
     imports: [
         AppRoutingModule,
+        NgxDatatableModule,
+        NotifierModule,
+        CommonModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
         GoogleChartsModule,
+        AngularFileUploaderModule,
     ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true}, DatePipe],
   bootstrap: [AppComponent]

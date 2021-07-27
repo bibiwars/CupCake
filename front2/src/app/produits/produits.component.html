@@ -16,6 +16,7 @@
     <td>{{p.qteStock}}</td>
     <td>{{p.note}}</td>
     <td>{{p.image}}</td>
+    <td><a class="btn btn-success" (click)="payer(p)">Ajouter au panier</a></td>
     <td><a routerLink="/produit/update/{{p.refPdt}}" class="btn btn-info">Modifier</a></td>
     <td><button (click)="delete(p.refPdt)"  class="btn btn-danger">Supprimer</button></td>
   </tr>

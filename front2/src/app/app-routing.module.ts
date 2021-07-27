@@ -37,6 +37,11 @@ import { PublicationAdminComponent } from './publication-admin/publication-admin
 import { UpdatePublicationComponent } from './update-publication/update-publication.component';
 import { UpdateReclamationComponent } from './update-reclamation/update-reclamation.component';
 
+import { CondidatureComponent } from './condidature/condidature.component';
+import { ShowCondidaturesComponent } from './show-condidatures/show-condidatures.component'
+import { CommandesComponent } from './commande/commandes.component';
+import { ShowCommandesComponent } from './show-commandes/show-commandes.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const ROUTES: Routes = [
   {path: '', redirectTo: '/pat', pathMatch: 'full'},
@@ -73,6 +78,12 @@ const ROUTES: Routes = [
   {  path: 'u/deactivate/:id',   component: UserDeactivateComponent,   data: { title: 'UserDeactivate' } },
   {  path: 'u/delete/:id',   component: UserDeleteComponent,   data: { title: 'UserDelete' } },
   
+  { path: 'contact-us', component: CondidatureComponent },
+  { path: 'list-condidatures', component: ShowCondidaturesComponent },
+  { path: 'panier', component: CommandesComponent },
+  { path: 'list-commandes', component: ShowCommandesComponent },
+  { path: 'payment', component: PaymentComponent },
+
   {path: '**', component: NotFoundComponent},
   
 ];
@@ -81,7 +92,7 @@ const ROUTES: Routes = [
   declarations: [],
   imports: [
     RouterModule.forRoot(ROUTES),
-    CommonModule
+    CommonModule,
   ],
   exports: [RouterModule]
 })

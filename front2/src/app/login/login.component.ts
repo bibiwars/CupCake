@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             }
           );
 
-          //window.location.href = '/';
+          window.location.href = '/';
         }else{
           alert('Erreur.');
         }

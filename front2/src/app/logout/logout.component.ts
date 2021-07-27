@@ -11,6 +11,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.setItem('jwt', '');
+    //localStorage.setItem('user', "{'role':''}");
     window.location.href = '/login';
   }
 

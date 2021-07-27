@@ -4,6 +4,7 @@ import {Produit} from '../model/produit';
 import {PatisserieServiceService} from '../services/patisserie-service.service';
 import {ProduitService} from '../services/produit.service';
 import {ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produits',
@@ -15,7 +16,7 @@ export class ProduitsComponent implements OnInit {
   idpatisserie: number;
   nom: string;
   // tslint:disable-next-line:max-line-length
-  constructor(private service: ActivatedRoute, private serviceProduit: ProduitService, private servicePatisserie: PatisserieServiceService) { }
+  constructor(private router: Router, private service: ActivatedRoute, private serviceProduit: ProduitService, private servicePatisserie: PatisserieServiceService) { }
 
   ngOnInit(): void {
     this.idpatisserie = this.service.snapshot.params.id;
@@ -30,6 +31,14 @@ export class ProduitsComponent implements OnInit {
     this.serviceProduit.deleteProduit(id).subscribe(
       () => this.listProd = this.listProd.filter(pat => pat.refPdt !== id)
     );
+  }
+
+  payer(p){
+    let products = JSON.parse(localStorage.getItem('products'));
+    p.number=1;
+    products = [...products, p];
+    localStorage.setItem('products', JSON.stringify(products));
+    //this.router.navigate(['/panier']);
   }
 
 }

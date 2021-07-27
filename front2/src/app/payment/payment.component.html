@@ -1,0 +1,176 @@
+<body style="background-color: #D3D3D3;">
+    <div class="container" style="margin-left: auto;margin-right: auto;margin">
+
+        <div class="row row-centered">
+            <div class="col-md-2"></div>
+            <div class="col-md-10 container-fluid"
+                style="border-style: groove;border-color: green;border-width: 3px;background-color: #ffffff;margin-left: auto;margin-right: auto;">
+                <br>
+                <div class="new">
+                    <div class="ligne"></div>
+                </div>
+                <br>
+                <form accept-charset="UTF-8" action="#" class="require-validation form-horizontal"
+                    data-cc-on-file="true" id="formPayment" method="post" name="PaymentForm" autocomplete="off">
+                    <input type="hidden" id="expiry">
+                    <input type="hidden" id="mdOrder">
+                    <input type="hidden" id="location" value="/../">
+                    <input type="hidden" id="language" value="">
+
+                    <span style="font-size: medium;font-weight:bold;"><b>Récapitulatif de votre
+                            commande</b><br></span><br>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold;font-size: small;  padding-left:10px">Marchand</td>
+                                    <td style="text-align:right;font-size: small; padding-right:10px"
+                                        id="merchantFullName">Cupcake</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold;font-size: small; padding-left:10px">Date commande</td>
+                                    <td style="text-align:right;font-size: small;padding-right:10px" id="paymentDate">
+                                        27-07-2021 18:16</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr class="abs" width="100%">
+                    <div id="errorBlock" style="color:red;">
+                        <p class="errorField" id="loginError"></p>
+                    </div>
+                    <div id="numberCountdown">Le paiement expire dans 0d:0h:19m:44s</div>
+                    <div id="infoBlock"></div>
+                    <div id="indicator" style="display:none;"><img src="images/ajax-loader.gif" height="19" width="220"
+                            alt="indicator"></div><br>
+
+
+                    <div class="form-group required has-feedback">
+                        <div class="col-md-10">
+                            <input class="form-control input-sm" name="TEXT" id="iTEXT" maxlength="90"
+                                placeholder="Client" type="text" autocomplete="off">
+                            <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group email required has-feedback">
+                        <div class="col-md-10">
+                            <input autocomplete="off" maxlength="90" class="form-control email input-sm"
+                                placeholder="Email" type="text" id="email">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="card-container">
+                        <img src="images/visa.png" class="visa" id="visa" style="opacity: 0.1;">
+                        <img src="images/mastercard.png" class="mcd" alt="Les cartes MasterCard sont autorisés"
+                            id="mastercard" style="opacity: 0.1;">
+                    </div>
+
+
+                    <div class="form-group card required has-feedback">
+                        <div class="col-md-10">
+                            <input autocomplete="off" maxlength="16" size="16" class="form-control card input-sm"
+                                placeholder="N° Carte" type="text" name="$PAN" id="iPAN">
+                            <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group cvc required has-feedback">
+                        <div class="col-md-8" style="display:inline-block;">
+                            <input autocomplete="new-password" class="form-control card-cvc input-sm" maxlength="3"
+                                size="16" placeholder="CVV2/Identifiant internet" id="iCVC" name="$CVC" type="password">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group expiration required">
+                        <label for="month" class="control-label col-md-2 input-sm">Expire:</label>
+
+                        <select class="form-control card-expiry-month inline input-sm" name="MM" id="month">
+                            <option value="" selected=""></option>
+                            <option value="01"> 1 - Janvier</option>
+                            <option value="02"> 2 - Février</option>
+                            <option value="03"> 3 - Mars</option>
+                            <option value="04"> 4 - April</option>
+                            <option value="05"> 5 - Mai</option>
+                            <option value="06"> 6 - Juin</option>
+                            <option value="07"> 7 - Juillet</option>
+                            <option value="08"> 8 - Août</option>
+                            <option value="09"> 9 - Septembre</option>
+                            <option value="10">10 - Octobre</option>
+                            <option value="11">11 - Novembre</option>
+                            <option value="12">12 - Décembre</option>
+                        </select>
+
+                        /
+                        <select class="form-control card-expiry-year inline input-sm" name="YYYY" id="year">
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                            <option value="2031">2031</option>
+                            <option value="2032">2032</option>
+                            <option value="2033">2033</option>
+                            <option value="2034">2034</option>
+                            <option value="2035">2035</option>
+                            <option value="2036">2036</option>
+                            <option value="2037">2037</option>
+                            <option value="2038">2038</option>
+                            <option value="2039">2039</option>
+                            <option value="2040">2040</option>
+                            <option value="2041">2041</option>
+                        </select>
+
+                    </div>
+
+                    <hr width="100%">
+                    <div class="form-row" style="width: 50%;margin: 0 auto;">
+                        <div class="form-group" style="width: 50%;margin: 0 auto;">
+                            <input class="form-control btn btn-primary submit-button" style="color: white;"
+                                type="button" value="Payer" id="buttonPayment" disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 error form-group hide">
+                            <div class="alert-danger alert">
+                                Veuillez corriger les erreurs et réessayer.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new">
+                        <div class="visaa"></div>
+                    </div>
+                </form>
+                <form id="acs" method="post" action="">
+                    <input type="hidden" id="MD" name="MD">
+                    <input type="hidden" id="PaReq" name="PaReq">
+                    <input type="hidden" id="TermUrl" name="TermUrl">
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+    <div id="janus-extension-installed" style="display: none;"></div>
+</body>

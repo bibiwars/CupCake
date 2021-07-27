@@ -1,0 +1,75 @@
+
+    <notifier-container></notifier-container>
+    <section class="ct-u-paddingTop100 ct-u-paddingBottom70 ct-u-backgroundGray">
+        <div class="container">
+            <div class="text-center ct-u-paddingBottom60">
+                <h4 class="ct-u-sectionHeader ct-u-sectionHeader--primary text-uppercase">
+                    Rejoigner nous
+                </h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a href="tel:8001234567" class="btn btn-primary"><i class="fa fa-fw fa-phone"></i> Télephone: (+216)
+                        29
+                        913 432</a>
+                    <div class="ct-js-spacer visible-sm visible-xs" data-value="10"></div>
+                    <a href="support@cupcake.com" class="btn btn-success"><i class="fa fa-fw fa-envelope"></i>
+                        Email: support@cupcake.com</a>
+                    <div class="ct-js-spacer visible-sm visible-xs" data-value="10"></div>
+                    <a href="#" class="btn btn-info"><i class="fa fa-fw fa-globe"></i> Site web: www.cupcake.com</a>
+                </div>
+                <div class="col-sm-12 ct-u-paddingTop20">
+                    <div class="ct-contactForm">
+                        <div class="successMessage alert alert-success" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            Thank You!
+                        </div>
+                        <div class="errorMessage alert alert-danger" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            Ups! An error occured. Please try again later.
+                        </div>
+
+                        <form role="form" action="http://macaroon.html.themeplayers.net/../assets/form/send.php"
+                            method="post" class="contactForm validateIt" data-email-subject="Contact Form"
+                            data-show-errors="true">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input id="applicateur" placeholder="Applicateur" required type="text"
+                                                    name="field[]" class="form-control"
+                                                    [(ngModel)]="condidature.applicateur">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input id="patisserie" placeholder="Patisserie" required type="email"
+                                                    name="field[]" class="form-control"
+                                                    [(ngModel)]="condidature.patisserie">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="message" placeholder="Message" class="form-control" rows="4"
+                                            name="field[]" required [(ngModel)]="condidature.message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <button type="submit" class="btn btn-purple text-uppercase" (click)="send()">
+                                        Envoyer méssage
+                                    </button>
+                                </div>
+                            </div>
+                            <angular-file-uploader [config]="afuConfig" (ApiResponse)="docUpload($event)">
+                            </angular-file-uploader>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
