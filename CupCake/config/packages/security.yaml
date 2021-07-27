@@ -39,9 +39,9 @@ security:
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/reset', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/resetpass', roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: '^/pat', roles: ROLE_ADMIN}
-        - { path: '^/pat/prod/', roles: ROLE_ADMIN}
-        - { path: '^/utilisateur/liste', roles: ROLE_ADMIN}
+        - { path: '^/pat', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/pat/prod/', roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: '^/utilisateur/liste', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/ajouter', roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: '^/utilisateur/supprimer', roles: ROLE_ADMIN}
         - { path: '^/utilisateur/modifier', roles: ROLE_ADMIN}

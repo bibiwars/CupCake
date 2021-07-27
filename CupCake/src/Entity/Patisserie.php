@@ -83,7 +83,8 @@ class Patisserie
     private $activer;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="patisserie")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="patisserie",orphanRemoval=true)
+     * @Groups("post:read")
      */
     private $produits;
 

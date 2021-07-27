@@ -15,7 +15,7 @@ export class PublicationService {
   postPublication(publication: Publication){
     return this.http.post(this.url + '/add'  , publication).subscribe((res: any) => {
       console.log(res);
-      this.router.navigate(['/publications']);
+      this.router.navigate(['admin/publications']);
     });
   }
   getPublications(){
@@ -25,11 +25,12 @@ export class PublicationService {
     return this.http.get<Publication>(this.url + '/' + id);
   }
   updatePublication(publication: Publication){
-    return this.http.post(this.url + '/update'  , publication).subscribe((res: any) => {
+    return this.http.post(this.url + 'update'  , publication).subscribe((res: any) => {
       console.log(res);
+      this.router.navigate(['admin/publications']);
     });
   }
   deletePublication(id){
-    return this.http.get(this.url + '/delete/' + id);
+    return this.http.get(this.url + 'delete/' + id);
   }
 }

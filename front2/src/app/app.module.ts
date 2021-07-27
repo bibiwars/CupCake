@@ -41,6 +41,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserActivateComponent } from './user-activate/user-activate.component';
 import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
+import { PublicationAdminComponent } from './publication-admin/publication-admin.component';
+import { UpdatePublicationComponent } from './update-publication/update-publication.component';
 
 
 @NgModule({
@@ -77,7 +79,9 @@ import { UserDeactivateComponent } from './user-deactivate/user-deactivate.compo
     DetailReclamationComponent,
     StatsComponent,
     AvisAdminComponent,
-    AjoutAvisComponent
+    AjoutAvisComponent,
+    PublicationAdminComponent,
+    UpdatePublicationComponent
   ],
     imports: [
         AppRoutingModule,

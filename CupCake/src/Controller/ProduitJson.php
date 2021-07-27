@@ -106,7 +106,7 @@ class ProduitJson extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $rec = $em->getRepository(Produit::class)->find($id);
         $rec->setDescription($request->get('description'));
-        $rec->setIdpatisserie($request->get('idpatisserie'));
+        //$rec->setIdpatisserie($request->get('idpatisserie'));
         $rec->setDesignation($request->get('designation'));
         $rec->setImage($request->get('image'));
         $rec->setPrix($request->get('prix'));

@@ -33,6 +33,8 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UserActivateComponent } from './user-activate/user-activate.component';
 import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
+import { PublicationAdminComponent } from './publication-admin/publication-admin.component';
+import { UpdatePublicationComponent } from './update-publication/update-publication.component';
 
 
 const ROUTES: Routes = [
@@ -54,6 +56,8 @@ const ROUTES: Routes = [
   {path: 'admin/reclamation/repondre/:id', component: RepondreReclamationsAdminComponent},
   {path: 'admin/reclamations/stats', component: StatsComponent},
   {path: 'admin/avis', component: AvisAdminComponent},
+  {path: 'admin/publications', component: PublicationAdminComponent},
+  {path: 'admin/publication/update/:id', component: UpdatePublicationComponent},
   
   {  path: 'login',   component: LoginComponent,   data: { title: 'Login' } },
   {  path: 'logout',   component: LogoutComponent,   data: { title: 'Logout' } },

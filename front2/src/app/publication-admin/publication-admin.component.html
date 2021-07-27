@@ -1,0 +1,17 @@
+<strong>Les publications</strong>
+<table class="table">
+  <tr>
+    <th>titre</th>
+    <th>texte</th>
+    <th>Competition</th>
+  </tr>
+  <tbody *ngFor="let p of listPub; let i= index">
+    <tr>
+      <td>{{p.titre}}</td>
+      <td>{{p.texte}}</td>
+      <td><a routerLink="/admin/publication/update/{{p.idPublication}}" class="btn btn-info">Modifier</a></td>
+      <td><button (click)="delete(p.idPublication)" class="btn btn-danger">Supprimer</button></td>
+    </tr>
+  </tbody>
+</table>
+<a routerLink="/admin/competitions">Voir les competitions</a>

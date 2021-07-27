@@ -18,8 +18,10 @@ export class UpdateProduitComponent implements OnInit {
     this.serviceProduit.getProduit(this.service.snapshot.params.id).subscribe(
       (res: Produit) => this.produit = res
     );
+    
   }
   update(){
+    this.produit.idpatisserie = this.service.snapshot.params.id;
     this.serviceProduit.updateProduit(this.produit);
   }
 

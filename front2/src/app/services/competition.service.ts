@@ -26,7 +26,7 @@ export class CompetitionService {
   }
 
   updateCompetition(competition: Competition){
-    return this.http.post(this.url + '/update'  , competition).subscribe((res: any) => {
+    return this.http.post(this.url + 'update'  , competition).subscribe((res: any) => {
       console.log(res);
       this.router.navigate(['admin/competitions']);
     });

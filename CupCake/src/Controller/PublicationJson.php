@@ -59,7 +59,7 @@ class PublicationJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/pub/del/{id}", name="pubb")
+     * @Route("/publicationdelete/{id}", name="deletepubb")
      */
     public function del(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -67,11 +67,10 @@ class PublicationJson extends AbstractController
         $comp = $em->getRepository(Publication::class)->find($id);
         $em->remove($comp);
         $em->flush();
-        $jsonContent = $Normalizer->normalize($comp,'json',['groups'=>'post:read']);
-        return new Response("Deleted".json_encode($jsonContent));
+        return new JsonResponse(true);
     }
     /**
-     * @Route("/pub/{id}", name="pubu")
+     * @Route("/publication/{id}", name="pubfffqfu")
      */
     public function find(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -81,18 +80,34 @@ class PublicationJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/pub/modify/{id}", name="pubm")
+     * @Route("/publicationupdate", name="pubupdate")
      */
     public function ModifyAction(Request $request,NormalizerInterface $Normalizer,$id)
     {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
         $em = $this->getDoctrine()->getManager();
-        $rec = $em->getRepository(Publication::class)->find($id);
-        $rec->setIdutilisateur(5);
-        $rec->setIdcompetition(3);
+        $rec = $em->getRepository(Publication::class)->find($request->get('idPublication'));
+        $rec->setIdcompetition($request->get('idcompetition'));
         $rec->setMedia($request->get('media'));
         $rec->setTexte($request->get('texte'));
         $rec->setTitre($request->get('titre'));
+        
         $em->flush();
+
+        $this->addFlash("success", "Inscription réussie !");
+
+
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));
     }

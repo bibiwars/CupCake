@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
         let jsonobj = JSON.parse(str);
         if(jsonobj.token!=''){
           localStorage.setItem('jwt', jsonobj.token);
+          localStorage.setItem('role', "ROLE_USER");
           window.location.href = '/';
         }else{
           alert('Erreur.');
