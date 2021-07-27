@@ -35,6 +35,7 @@ import { UserDeactivateComponent } from './user-deactivate/user-deactivate.compo
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { PublicationAdminComponent } from './publication-admin/publication-admin.component';
 import { UpdatePublicationComponent } from './update-publication/update-publication.component';
+import { UpdateReclamationComponent } from './update-reclamation/update-reclamation.component';
 
 
 const ROUTES: Routes = [
@@ -50,6 +51,7 @@ const ROUTES: Routes = [
   {path: 'admin/competition/update/:id', component: UpdateCompetitionComponent},
   {path: 'publications', component: PublicationsComponent},
   {path: 'reclamation/add', component: AjoutReclamationComponent},
+  {path: 'reclamation/update/:id', component: UpdateReclamationComponent},
   {path: 'mesreclamations', component: ReclamationsComponent},
   {path: 'reclamation/detail/:id', component: DetailReclamationComponent},
   {path: 'admin/reclamations', component: ReclamationsAdminComponent},

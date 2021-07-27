@@ -16,6 +16,10 @@ export class UserService {
     return this.Http.get('https://127.0.0.1:8001/utilisateur/authenticated');
   }
 
+  GetRolesUser(){
+    return this.Http.get('https://127.0.0.1:8001/utilisateur/roles');
+  }
+
   GetUsers(){
     return this.Http.get('https://127.0.0.1:8001/utilisateur/liste');
   }

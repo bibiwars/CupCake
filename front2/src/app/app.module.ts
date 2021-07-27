@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { JwtInterceptorService } from './shared/jwt-interceptor.service';
@@ -43,6 +44,7 @@ import { UserActivateComponent } from './user-activate/user-activate.component';
 import { UserDeactivateComponent } from './user-deactivate/user-deactivate.component';
 import { PublicationAdminComponent } from './publication-admin/publication-admin.component';
 import { UpdatePublicationComponent } from './update-publication/update-publication.component';
+import { UpdateReclamationComponent } from './update-reclamation/update-reclamation.component';
 
 
 @NgModule({
@@ -81,7 +83,8 @@ import { UpdatePublicationComponent } from './update-publication/update-publicat
     AvisAdminComponent,
     AjoutAvisComponent,
     PublicationAdminComponent,
-    UpdatePublicationComponent
+    UpdatePublicationComponent,
+    UpdateReclamationComponent
   ],
     imports: [
         AppRoutingModule,
@@ -90,7 +93,7 @@ import { UpdatePublicationComponent } from './update-publication/update-publicat
         HttpClientModule,
         GoogleChartsModule,
     ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true}, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

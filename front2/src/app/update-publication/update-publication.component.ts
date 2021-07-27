@@ -25,7 +25,7 @@ export class UpdatePublicationComponent implements OnInit {
   update(){
     console.log(this.publication);
     this.publication.idPublication = this.service.snapshot.params.id;
-    this.servicePublication.updatePublication(this.publication);
+    this.servicePublication.updatePublication(this.publication,this.service.snapshot.params.id);
   }
 
 }

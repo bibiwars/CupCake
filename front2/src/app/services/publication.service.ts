@@ -24,8 +24,8 @@ export class PublicationService {
   getPublication(id): Observable<Publication>{
     return this.http.get<Publication>(this.url + '/' + id);
   }
-  updatePublication(publication: Publication){
-    return this.http.post(this.url + 'update'  , publication).subscribe((res: any) => {
+  updatePublication(publication: Publication, id: number){
+    return this.http.post(this.url + 'update/'+ id  , publication).subscribe((res: any) => {
       console.log(res);
       this.router.navigate(['admin/publications']);
     });

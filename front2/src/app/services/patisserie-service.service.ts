@@ -28,6 +28,7 @@ export class PatisserieServiceService {
   updatePatisserie(patisserie: Patisserie){
     return this.http.post(this.url + '/update/' + patisserie.id  , patisserie).subscribe((res: any) => {
       console.log(res);
+      this.router.navigate(['/pat']);
     });
   }
 }

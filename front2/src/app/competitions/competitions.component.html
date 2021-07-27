@@ -9,8 +9,8 @@
   <tbody *ngFor="let p of listComp; let i= index">
   <tr>
     <td>{{p.nomCompetition}}</td>
-    <td>{{p.dateDebut}}</td>
-    <td>{{p.dateFin }}</td>
+    <td>{{p.dateDebut | date: 'dd-MM-yyyy'}}</td>
+    <td>{{p.dateFin | date: 'dd-MM-yyyy' }}</td>
     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" (click)="setCurrentComp(p.idCompetition)" >Partager</button></td>
     <td><a routerLink="../competition/update/{{p.idCompetition}}" class="btn btn-info">Modifier</a></td>
     <td><button (click)="delete(p.idCompetition)" class="btn btn-danger">Supprimer</button></td>

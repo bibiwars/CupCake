@@ -1,0 +1,30 @@
+<strong>Modifier une Reclamation</strong>
+<form #f="ngForm" class="form">
+  <div class="form-group">
+    <label>Type</label>
+    <select type="text" class="form-control" [(ngModel)]="reclamation.type" name="type" #d="ngModel"  required>
+      <option value="type 1">Type 1</option>
+      <option value="type 2">Type 2</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      le type est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Message</label>
+    <textarea  class="form-control" [(ngModel)]="reclamation.imessage" name="titre" #d="ngModel" placeholder="Message" required></textarea>
+    <div class="alert alert-danger" *ngIf="d.invalid && d.touched">
+      le message est obligatoire!
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="Modifier" name="ajouter" [disabled]="f.invalid" (click)="update()" class="btn btn-primary">
+    <div class="submitting"></div>
+  </div>
+</form>
+<a routerLink="/mesreclamations">Voir mes reclamations</a>
+
+
+
+
+

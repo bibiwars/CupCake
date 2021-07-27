@@ -418,4 +418,17 @@ class UtilisateurController extends AbstractController
         }  
     }
 
+    /**
+     * @Route("/utilisateur/roles", name="roles_utilisateur")
+     */
+    public function rolesutilisateur(Security $security): Response
+    {
+        try{
+            $u = $security->getUser();
+            return new Response(json_encode(array('id' => $u->getRoles())));
+        }catch(\Throwable $throwable){
+            return new Response(json_encode(array('resultat' => '1')));
+        }  
+    }
+
 }

@@ -73,7 +73,7 @@ class ReclamationJson extends AbstractController
     }
 
     /**
-     * @Route("/reclamationdelete/{id}", name="cvvd")
+     * @Route("/reclamation/delete/{id}", name="cvvd")
      */
     public function del(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -95,18 +95,28 @@ class ReclamationJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/recmodify/{id_reclamation}", name="cvre")
+     * @Route("/reclamationupdate", name="cvre")
      */
-    public function ModifyAction(Request $request,NormalizerInterface $Normalizer,$id_reclamation)
+    public function ModifyAction(Request $request,NormalizerInterface $Normalizer)
     {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
         $em = $this->getDoctrine()->getManager();
-        $rec = $em->getRepository(Reclamation::class)->find($id_reclamation);
+        $rec = $em->getRepository(Reclamation::class)->find($request->get('idReclamation'));
+        $rec->setType($request->get('type'));
         $rec->setImessage($request->get('imessage'));
-        $rec->setIdutilisateur($request->get('iduser'));
-        $rec->setIdpatisserie($request->get('idpatisserie'));
-        $rec->setVisible($request->get('visible'));
-        $rec->setStatus($request->get('status'));
-        $rec->setReponse($request->get('reponse'));
+        $rec->setStatus('non traite');
+        $rec->setReponse('');
         $em->flush();
         $jsonContent = $Normalizer->normalize($rec,'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent));

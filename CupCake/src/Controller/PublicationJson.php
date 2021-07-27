@@ -80,7 +80,7 @@ class PublicationJson extends AbstractController
         return new Response(json_encode($jsonContent));
     }
     /**
-     * @Route("/publicationupdate", name="pubupdate")
+     * @Route("/publicationupdate/{id}", name="pubupdate")
      */
     public function ModifyAction(Request $request,NormalizerInterface $Normalizer,$id)
     {
@@ -97,8 +97,8 @@ class PublicationJson extends AbstractController
         $request->request->replace($data);
 
         $em = $this->getDoctrine()->getManager();
-        $rec = $em->getRepository(Publication::class)->find($request->get('idPublication'));
-        $rec->setIdcompetition($request->get('idcompetition'));
+        $rec = $em->getRepository(Publication::class)->find($id);
+      
         $rec->setMedia($request->get('media'));
         $rec->setTexte($request->get('texte'));
         $rec->setTitre($request->get('titre'));

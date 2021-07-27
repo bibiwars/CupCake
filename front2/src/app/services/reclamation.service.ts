@@ -31,6 +31,7 @@ export class ReclamationService {
   updateReclamation(reclamation: Reclamation){
     return this.http.post(this.url + 'update'  , reclamation).subscribe((res: any) => {
       console.log(res);
+      this.router.navigate(['/mesreclamations']);
     });
   }
   deleteReclamation(id){
@@ -38,6 +39,7 @@ export class ReclamationService {
   }
   repondreReclamation(reclamation: Reclamation){
     return this.http.post(this.url + 's/repondre/' + reclamation.idReclamation  , reclamation).subscribe((res: any) => {
+      this.router.navigate(['/mesreclamations']);
       console.log(res);
     });
   }

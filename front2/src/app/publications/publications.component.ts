@@ -13,7 +13,7 @@ export class PublicationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.servicePublication.getPublications().subscribe(
-      (res: Publication[]) => {this.listPub = res; console.log(this.listPub); }
+      (res: Publication[]) => {this.listPub = res; console.log(res); }
     );
   }
 
